@@ -16,13 +16,16 @@ def scaled_dot_prod_attention(queries, keys, values, mask = None):
     :type queries:  torch.Tensor(dtype=torch.float32)
     :type keys:     torch.Tensor(dtype=torch.float32)
     :type values:   torch.Tensor(dtype=torch.float32)
-    :type mask:     torch.Tensor(dtype=torch.uint8)
+    :type mask:     torch.Tensor(dtype=torch.bool)
     :return:        :math:`... \times l_q  \times d_v`
     :rtype:         torch.Tensor(dtype=torch.float32)
     """
     weights = queries.matmul( keys.transpose(-1,-2) ) # ... x l_q x l_kv
     weights *= keys.size(-1) ** -0.5
     if mask is not None:
+        # Older callers pass uint8 padding masks; modern PyTorch indexing
+        # requires boolean masks.
+        mask = mask.to(dtype=torch.bool)
         if mask.dim() == weights.dim() - 1:
             mask = mask.unsqueeze(-2).expand_as(weights)
         weights[mask] = -float('inf')
@@ -60,7 +63,7 @@ class _MHA_V1(nn.Module):
         :type queries:  torch.Tensor(dtype=torch.float32)
         :type keys:     torch.Tensor(dtype=torch.float32)
         :type values:   torch.Tensor(dtype=torch.float32)
-        :type mask:     torch.Tensor(dtype=torch.uint8)
+        :type mask:     torch.Tensor(dtype=torch.bool)
         :return:        :math:`... \times l_q  \times d_v`
         :rtype:         torch.Tensor(dtype=torch.float32)
         """
@@ -151,6 +154,7 @@ class _MHA_V2(nn.Module):
         weights = q_proj.matmul( k_proj )
         weights *= self._inv_sqrt_d
         if mask is not None:
+            mask = mask.to(dtype=torch.bool)
             if mask.numel() * self.head_count == weights.numel(): # one mask per query
                 m = mask.view(-1,1,l_q,l_kv).expand_as(weights)
             else: # common mask for all queries
@@ -326,6 +330,7 @@ class MixedScore_MultiHeadAttention(nn.Module):
 
         # Apply mask if provided
         if mask is not None:
+            mask = mask.to(dtype=torch.bool)
             if mask.numel() * self.head_count == mixed_scores.numel():  # one mask per query
                 m = mask.view(-1, 1, l_q, l_kv).expand_as(mixed_scores)
             else:  # common mask for all queries

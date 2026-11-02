@@ -110,10 +110,63 @@ To train the paper's internal variants across the configured random seeds:
 bash script/train_all_seeds.sh
 ```
 
-Both commands generate new timestamped output directories.  Training is
-stochastic; the supplied `chkpt_best.pyth` files are the reference artefacts
-for result reproduction, while retraining is intended to reproduce the
-protocol and performance trend rather than byte-identical weights.
+For the current COAST-only run on the B200, use
+[`script/train_coast_b200.json`](script/train_coast_b200.json). It schedules
+COAST for the existing five seeds, one job at a time on GPU 0. Set `PYTHON` to
+the interpreter from `fast_infer_text_sum` under the server's
+`/workspace/storage-shared/` mount. The launcher inherits the active
+interpreter because the config has `python: null`. COAST does not need the
+AM/PolyNet dependency overlay below. From the MARDAM checkout, activate that
+environment first:
+
+```bash
+source /workspace/storage-shared/<fast_infer_text_sum-path>/.venv/bin/activate
+export PYTHON="$(command -v python)"
+"$PYTHON" -c 'import torch; print(torch.__version__, torch.version.cuda)'
+"$PYTHON" script/train_multiseed.py --config script/train_coast_b200.json --dry-run
+"$PYTHON" script/train_multiseed.py --config script/train_coast_b200.json --preflight-only
+"$PYTHON" script/train_multiseed.py --config script/train_coast_b200.json
+```
+
+Run the final command in `tmux` or `screen`. The launcher checks the COAST CLI,
+the B200 device, and a CUDA matrix multiplication before it creates the shared
+train/validation pools. The five runs write under
+`output/coast_multiseed_b200/coast/seed*/` and refuse to overwrite existing
+outputs.
+
+The full four-model matrix remains available through
+[`script/train_multiseed_g1.json`](script/train_multiseed_g1.json). Its AM and
+PolyNet trainers need `torchrl` and `lightning`, which are not in the B200 base
+environment. Install this repository's small overlay only when running those
+methods; it does not pin PyTorch or CUDA:
+
+```bash
+"$PYTHON" -m pip install -r requirements.b200-baselines.txt
+```
+
+Do not install `third_party/baselines/RL4DVRPTW/requirements.txt` into the
+B200 environment: it pins PyTorch `2.9.1` and CUDA 12.8 packages, which conflict
+with the server's PyTorch 2.13/CUDA 13.0 stack. The root requirements for the
+original COAST environment also pin a different PyTorch version (`2.6.0`).
+
+The launcher creates one raw training and validation pool per seed, shares
+those files across the four methods, and records their hashes with each run.
+For multiple allocated GPUs, edit `gpu_ids`, `parallel_per_gpu`, and optionally
+`job_gpu_map` in the config; keep concurrency at one per GPU unless the server
+allocation and available host memory have been checked. A run-specific mapping
+such as `"coast:42": "1"` takes precedence over a method-wide mapping such as
+`"mardam": "0"`. Ensure `output_root` has enough storage for the shared pools
+and checkpoints. The launcher stops if the shared simulator/generator/loss
+sources differ, the configured GPU is not visible, or an output path already
+exists. Multi-seed jobs fail on out of memory rather than silently changing the
+configured batch or validation result. Choose a new `output_root` for a new
+matrix.
+
+The shell commands generate timestamped output directories; the multi-seed
+runner uses the configured output root and refuses to overwrite existing runs.
+Training is stochastic; the supplied `chkpt_best.pyth` files are the reference
+artefacts for result reproduction, while retraining is intended to reproduce
+the protocol and performance trend rather than byte-identical weights.
 
 ## Benchmarks and reference artefacts
 
@@ -140,8 +193,10 @@ and are not needed for inference.
 
 ## External baselines
 
-AM and PolyNet are evaluated through a separate external codebase specified by
-`RL4DVRPTW_ROOT`; their implementation and weights are not bundled here.  The
+Reviewer-facing source snapshots for RL4DVRPTW (including AM and PolyNet)
+and GP-DVRPTW are bundled under [`third_party/baselines/`](third_party/baselines/README.md).
+Their datasets, trained weights/checkpoints, and generated outputs are not
+included; see the snapshot READMEs and `PROVENANCE.json` manifests.  The
 reported summary values are retained in `paper_results/csv_exports/` for
 transparency.  LKH is supported through `externals/_lkh.py` when a compatible
 LKH executable is available.  OR-Tools runs require the optional `ortools`

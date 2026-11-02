@@ -1,0 +1,4 @@
+# Add these RL4DVRPTW runtime dependencies on top of the B200 environment
+# from fast_infer_text_sum/requirements.txt. Do not add PyTorch/CUDA pins here.
+lightning==2.6.6
+torchrl==0.14.1

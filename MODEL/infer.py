@@ -24,6 +24,7 @@ from problems import (
 	VRPTW_Environment,
 )
 from utils import actions_to_routes, eval_apriori_routes, parse_args, routes_to_string, set_random_seed
+from utils._chkpt import checkpoint_args_json_path
 
 
 def parse_infer_args(argv = None):
@@ -60,6 +61,11 @@ def parse_infer_args(argv = None):
 
 	infer_args, remain = infer_parser.parse_known_args(argv)
 	args = parse_args(remain)
+	if args.config_file is None:
+		config_path = checkpoint_args_json_path(args.model_weight)
+		if config_path is not None:
+			print("[infer] Reconstructing model config from '{}'".format(config_path))
+			args = parse_args(["--config-file", str(config_path), *remain])
 
 	args.data_csv = infer_args.data_csv
 	args.data_file = infer_args.data_file

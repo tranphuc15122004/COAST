@@ -1,0 +1,20 @@
+[package]
+name = "vrpr"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.88"
+base64 = "0.22.1"
+chrono = "0.4.38"
+dotenv = "0.15.0"
+lazy_static = { version = "1.5.0", default-features = false, features = ["spin_no_std"] }
+lru = "0.12.4"
+miniserde = "0.1.40"
+ordered-float = "4.2.2"
+rand = { version = "0.8.5", features = ["small_rng"] }
+smallvec = "1.13.2"
+
+[profile.release-lto]
+inherits = "release"
+lto = true

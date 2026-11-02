@@ -14,7 +14,7 @@ consolidated = {
         'B3': {'mean':44.84,'std':4.08,'type':'Ablation'},
         'B5': {'mean':45.47,'std':4.07,'type':'Ablation'},
         'EdgeOff': {'mean':45.88,'std':4.07,'type':'Ablation'},
-        'MARDAM': {'mean':45.02,'std':1.62,'type':'Literature'},
+        'MARDAM': {'mean':44.76,'std':3.78,'type':'Literature'},
         'AM': {'mean':49.22,'std':4.69,'type':'Literature'},
         'PolyNet': {'mean':49.18,'std':4.97,'type':'Literature'},
         'Greedy NN': {'mean':58.69,'std':6.54,'type':'Classical'},
@@ -83,7 +83,7 @@ COAST & Proposed & $44.02\pm3.99$ & --- \\
 no\_lookahead & Ablation & $44.73\pm4.03$ & +1.6\% \\
 no\_ownership & Ablation & $45.19\pm4.09$ & +2.7\% \\
 B0 (none) & Ablation & $45.39\pm4.10$ & +3.1\% \\
-MARDAM & Literature & $45.02\pm1.62$ & +2.3\% \\
+MARDAM & Literature & $44.76\pm3.78$ & +1.7\% \\
 AM & Literature & $49.22\pm4.69$ & +11.8\% \\
 PolyNet & Literature & $49.18\pm4.97$ & +11.7\% \\
 Greedy NN & Classical & $58.69\pm6.54$ & +33.3\% \\ \bottomrule

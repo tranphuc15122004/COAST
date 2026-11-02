@@ -20,6 +20,9 @@ class Baseline:
                 self.learner._reset_memory(vrp_dynamics)
             actions, logps, rewards, bl_vals = [], [], [], []
             while not vrp_dynamics.done:
+                if getattr(vrp_dynamics, "new_customers", False):
+                    cust_mask = getattr(vrp_dynamics, "cust_mask", None)
+                    self.learner._encode_customers(vrp_dynamics.nodes, cust_mask)
                 veh_repr = self.learner._repr_vehicle(
                         vrp_dynamics.vehicles,
                         vrp_dynamics.cur_veh_idx,

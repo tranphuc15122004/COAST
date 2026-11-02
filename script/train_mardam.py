@@ -3,7 +3,6 @@
 from _learner import AttentionLearner
 from problems import *
 from baselines import *
-from externals import *
 from dep import *
 from utils import *
 from layers import reinforce_loss
@@ -47,7 +46,13 @@ def train_epoch(args, data, Environment, env_params, bl_wrapped_learner, optim, 
             dyna = Environment(data, custs, mask, *env_params)
             with autocast(enabled = args.amp):
                 actions, logps, rewards, bl_vals = bl_wrapped_learner(dyna)
-                loss = reinforce_loss(logps, rewards, bl_vals)
+                loss = reinforce_loss(
+                    logps,
+                    rewards,
+                    bl_vals,
+                    adv_norm = args.adv_norm,
+                    entropy_coef = args.entropy_coef,
+                )
 
             prob = torch.stack(logps).sum(0).exp().mean()
             val = torch.stack(rewards).sum(0).mean()
@@ -122,25 +127,32 @@ def test_epoch(args, test_env, learner, ref_costs):
 
 def val_epoch(args, test_env, learner):
     learner.eval()
-    with torch.no_grad():   # 🔥 BẮT BUỘC
-        if args.problem_type[0] == "s":
-            costs = test_env.nodes.new_zeros(test_env.minibatch_size)
-            for _ in range(100):
-                _, _, rewards = learner(test_env)
-                costs -= torch.stack(rewards).sum(0).squeeze(-1)
-            costs = costs / 100
-        else:
-            _, _, rs = learner(test_env)
-            costs = -torch.stack(rs).sum(dim = 0).squeeze(-1)
-        mean = costs.mean()
-        std = costs.std()
+    prev_greedy = getattr(learner, "greedy", None)
+    if prev_greedy is not None:
+        learner.greedy = True
+    try:
+        with torch.no_grad():
+            if args.problem_type[0] == "s":
+                costs = test_env.nodes.new_zeros(test_env.minibatch_size)
+                for _ in range(100):
+                    _, _, rewards = learner(test_env)
+                    costs -= torch.stack(rewards).sum(0).squeeze(-1)
+                costs = costs / 100
+            else:
+                _, _, rs = learner(test_env)
+                costs = -torch.stack(rs).sum(dim = 0).squeeze(-1)
+            mean = costs.mean()
+            std = costs.std()
+    finally:
+        if prev_greedy is not None:
+            learner.greedy = prev_greedy
 
     print("Cost on test dataset: {:5.2f} +- {:5.2f}".format(mean, std))
     return mean.item(), std.item()
 
 def main(args):
     dev = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
-    set_random_seed(args.rng_seed, deterministic = True)
+    set_random_seed(args.rng_seed, deterministic = False)
 
     if args.verbose:
         verbose_print = print
@@ -173,10 +185,19 @@ def main(args):
     verbose_print("Generating {} {} samples of training data...".format(
         args.iter_count * args.batch_size, args.problem_type.upper()),
         end = " ", flush = True)
-    train_data = Dataset.generate(
-            args.iter_count * args.batch_size,
-            *gen_params
+    if args.train_data_file is not None:
+        train_data = Dataset.load(args.train_data_file)
+    else:
+        train_data = Dataset.generate(
+                args.iter_count * args.batch_size,
+                *gen_params
+                )
+    if len(train_data) != args.iter_count * args.batch_size:
+        raise ValueError(
+            "Training pool has {} instances; expected iter_count * batch_size = {}".format(
+                len(train_data), args.iter_count * args.batch_size
             )
+        )
     train_data.normalize()
     verbose_print("Done.")
 
@@ -184,15 +205,28 @@ def main(args):
     verbose_print("Generating {} {} samples of test data...".format(
         args.test_batch_size, args.problem_type.upper()),
         end = " ", flush = True)
-    test_data = Dataset.generate(
-            args.test_batch_size,
-            *gen_params
+    if args.test_data_file is not None:
+        test_data = Dataset.load(args.test_data_file)
+    else:
+        test_data = Dataset.generate(
+                args.test_batch_size,
+                *gen_params
+                )
+    if len(test_data) != args.test_batch_size:
+        raise ValueError(
+            "Validation pool has {} instances; expected test_batch_size = {}".format(
+                len(test_data), args.test_batch_size
             )
+        )
     verbose_print("Done.")
 
     if ORTOOLS_ENABLED:
+        from externals._ort import ort_solve
+
         ref_routes = ort_solve(test_data)
     elif LKH_ENABLED:
+        from externals._lkh import lkh_solve
+
         ref_routes = lkh_solve(test_data)
     else:
         ref_routes = None

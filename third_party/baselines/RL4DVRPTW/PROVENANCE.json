@@ -1,0 +1,1952 @@
+{
+  "snapshot_type": "allowlisted source snapshot from source working tree",
+  "source_repository": "RL4DVRPTW",
+  "source_commit": "f790bbeca55c861dc5ce73fd3cf1d26881f8582e",
+  "source_root_recorded_as": "RL4DVRPTW",
+  "license_file_found_in_source_tree": false,
+  "included_file_count": 320,
+  "included_files": [
+    {
+      "path": "MVMoe/__init__.py",
+      "source_path": "MVMoe/__init__.py",
+      "size_bytes": 108,
+      "sha256": "26c211c089a224fea5dab506ec69fb8f973c847e1e08e09c3e1d934c52fa48bd"
+    },
+    {
+      "path": "MVMoe/model.py",
+      "source_path": "MVMoe/model.py",
+      "size_bytes": 10379,
+      "sha256": "e47353245b1edff5b09092c36e97d639eec819afc370ea589b623051f94ed4b4"
+    },
+    {
+      "path": "MVMoe/train.py",
+      "source_path": "MVMoe/train.py",
+      "size_bytes": 32690,
+      "sha256": "18c0617f001638e938725e0793d07ff66625606e4c410c06834ac38a01063e54"
+    },
+    {
+      "path": "README.md",
+      "source_path": null,
+      "size_bytes": 1515,
+      "sha256": "851a93461559a8192108f6205e32de1845a445989c7aaefb0a1a4354e9b833c3"
+    },
+    {
+      "path": "aggregate_results.py",
+      "source_path": "aggregate_results.py",
+      "size_bytes": 4805,
+      "sha256": "5f5dc424ee18fe635d16268569c816aa0e59f43a9d10abe450e896c70594fa30"
+    },
+    {
+      "path": "am/__init__.py",
+      "source_path": "am/__init__.py",
+      "size_bytes": 153,
+      "sha256": "b028765c28212750952e3e790163eb16b586c3db9f63790a98f7fb60e801f472"
+    },
+    {
+      "path": "am/decoder.py",
+      "source_path": "am/decoder.py",
+      "size_bytes": 8876,
+      "sha256": "9feca2d1ee33d3a645ade50743f9a54d6785cb94159ce82e8bf1002b8adb5d2e"
+    },
+    {
+      "path": "am/encoder.py",
+      "source_path": "am/encoder.py",
+      "size_bytes": 2877,
+      "sha256": "e8921159b13f0eb5bfee01b93fe8cac95efb24c6cc5176580acad53744cabd90"
+    },
+    {
+      "path": "am/infer.py",
+      "source_path": "am/infer.py",
+      "size_bytes": 19478,
+      "sha256": "81e922e572cfe0e896ea544f0f4fc8d30afc56941ba05482f8fb69322696fe6c"
+    },
+    {
+      "path": "am/infer_single.py",
+      "source_path": "am/infer_single.py",
+      "size_bytes": 6378,
+      "sha256": "c3129b0aceb1c037f670acaf0c15213720bed5cf9b94586811cbbc8b2d1a5541"
+    },
+    {
+      "path": "am/model.py",
+      "source_path": "am/model.py",
+      "size_bytes": 6968,
+      "sha256": "3b4bfc4881c82808d40be03e154ce2dc6f2fa814a7859cf606421e158290457d"
+    },
+    {
+      "path": "am/policy.py",
+      "source_path": "am/policy.py",
+      "size_bytes": 5668,
+      "sha256": "3cc1d4257c7a8ace71f8dd6d3d33d845a58e2ab31187b272befd5d574597acd6"
+    },
+    {
+      "path": "am/train.py",
+      "source_path": "am/train.py",
+      "size_bytes": 33895,
+      "sha256": "7f62072e6bb31a976f1042489e1350535614a8b9e05204dbe9981f4ccba520a8"
+    },
+    {
+      "path": "baselines/__init__.py",
+      "source_path": "baselines/__init__.py",
+      "size_bytes": 152,
+      "sha256": "c7271a92177aacf4e23a3d531bb1e117d49f26e8cdd307d634ffc44cdb8bf427"
+    },
+    {
+      "path": "baselines/_base.py",
+      "source_path": "baselines/_base.py",
+      "size_bytes": 5630,
+      "sha256": "4b5a6ff20a34bebaa959e6b8799ad09e6c33c775cf4e888986b554f6103a304a"
+    },
+    {
+      "path": "baselines/_critic.py",
+      "source_path": "baselines/_critic.py",
+      "size_bytes": 4604,
+      "sha256": "7ae68b7db79d668e6e0c20f7abe9887922d3426647f2719050c3cebbfedd4caf"
+    },
+    {
+      "path": "baselines/_near_nb.py",
+      "source_path": "baselines/_near_nb.py",
+      "size_bytes": 1084,
+      "sha256": "ab82e7069da4d7933db723efe62ff6b78c50598188374bb472ba8078ff2d3cd1"
+    },
+    {
+      "path": "baselines/_no_bl.py",
+      "source_path": "baselines/_no_bl.py",
+      "size_bytes": 194,
+      "sha256": "3abdc653e84136cdd70ad53565edd050b46aef829949780e5e69b68d9ba0ea84"
+    },
+    {
+      "path": "baselines/_rollout.py",
+      "source_path": "baselines/_rollout.py",
+      "size_bytes": 2110,
+      "sha256": "9ba51a8052d6814c594c36db0fc83fde217c25ff75b669ba74a97c00a7d5be11"
+    },
+    {
+      "path": "data/_AM/args.json",
+      "source_path": "data/_AM/args.json",
+      "size_bytes": 2594,
+      "sha256": "6927dae81fe4c9d1760eb0c724eb6518bcdcc4ce260588dc295e30a58db83d13"
+    },
+    {
+      "path": "data/_PolyNet/args.json",
+      "source_path": "data/_PolyNet/args.json",
+      "size_bytes": 2550,
+      "sha256": "b3a13420f357eafbbda6b4e3af5c18149327558930166dd36e6f77bd47067e9f"
+    },
+    {
+      "path": "infer_batch.py",
+      "source_path": "infer_batch.py",
+      "size_bytes": 33704,
+      "sha256": "3a61ad37551417f23a4c0fb4caffc2637b0450ee0723026da007b1feb76be648"
+    },
+    {
+      "path": "layers/Mymodel_layers.py",
+      "source_path": "layers/Mymodel_layers.py",
+      "size_bytes": 11734,
+      "sha256": "7637d9eee32ac24496221124793bafcbd4da05217b8adb482233e18d4bf698c4"
+    },
+    {
+      "path": "layers/__init__.py",
+      "source_path": "layers/__init__.py",
+      "size_bytes": 401,
+      "sha256": "4c7366937540b6ffcd0b27b680db39a7615a236c19df7290151df745b3b4ce0b"
+    },
+    {
+      "path": "layers/_loss.py",
+      "source_path": "layers/_loss.py",
+      "size_bytes": 5077,
+      "sha256": "e489d8d96540bf840235447af1d3ef91281efc2c45b5173bcda98691e2b8fc87"
+    },
+    {
+      "path": "layers/_mha.py",
+      "source_path": "layers/_mha.py",
+      "size_bytes": 15947,
+      "sha256": "375684111367a4911a0ba65d3c46eb46cef7ba3edfe4f2237ed1126a65a1404a"
+    },
+    {
+      "path": "layers/_transformer.py",
+      "source_path": "layers/_transformer.py",
+      "size_bytes": 1915,
+      "sha256": "6d7d4af6a44fa9ea299c2700f3a750659c905f867fe1101198783f0c3dad8dd7"
+    },
+    {
+      "path": "mdam/__init__.py",
+      "source_path": "mdam/__init__.py",
+      "size_bytes": 55,
+      "sha256": "0200c3e9c9b272819fbdedd4a5442f4458b9dcb605d35896f74e01b52e2b8d7a"
+    },
+    {
+      "path": "mdam/decoder.py",
+      "source_path": "mdam/decoder.py",
+      "size_bytes": 12391,
+      "sha256": "63cef39883df441c283401ac63c14fc7a66166d4d4016b6df26a68e32014daa3"
+    },
+    {
+      "path": "mdam/encoder.py",
+      "source_path": "mdam/encoder.py",
+      "size_bytes": 3155,
+      "sha256": "5de328bbbe16d6c9cbe663a9ddaa180a52439326fe7bed7bc98d25cb2a4fc70e"
+    },
+    {
+      "path": "mdam/mha.py",
+      "source_path": "mdam/mha.py",
+      "size_bytes": 3094,
+      "sha256": "f41f4c1e92b6e59780f74d412fc122088ab040b7729934d7e2bf463f46da9841"
+    },
+    {
+      "path": "mdam/model.py",
+      "source_path": "mdam/model.py",
+      "size_bytes": 4701,
+      "sha256": "2e7e2c0106485cdbc76ad0b19a3a58b94393dbd057cc9e8f491409aa4f9f21cd"
+    },
+    {
+      "path": "mdam/policy.py",
+      "source_path": "mdam/policy.py",
+      "size_bytes": 2765,
+      "sha256": "efe970ea4626b70a67b644ae0ae7cf63485c5fa26824fbc4b61fccd53b61582e"
+    },
+    {
+      "path": "mdam/train.py",
+      "source_path": "mdam/train.py",
+      "size_bytes": 32387,
+      "sha256": "7dae52ad06d33ec782d19abeabe14d53efde0ce2c979f071cb5fdad88ca4d8ac"
+    },
+    {
+      "path": "polynet/__init__.py",
+      "source_path": "polynet/__init__.py",
+      "size_bytes": 84,
+      "sha256": "2d4376ce855666f5bc73f26bc3eb50b5e947f40464d144a9dbffaabcb7c64e19"
+    },
+    {
+      "path": "polynet/decoder.py",
+      "source_path": "polynet/decoder.py",
+      "size_bytes": 5199,
+      "sha256": "a6c17395b44f623dcf34ae6dad2372694ae0d5316d949e0b43e990a4cdecf9a7"
+    },
+    {
+      "path": "polynet/infer.py",
+      "source_path": "polynet/infer.py",
+      "size_bytes": 19312,
+      "sha256": "a970d11f7661f1dda9a0c68f841a73b3c9d76f7d9cc8832c6d599f8b0a483667"
+    },
+    {
+      "path": "polynet/infer_single.py",
+      "source_path": "polynet/infer_single.py",
+      "size_bytes": 6342,
+      "sha256": "a1ff549494b5167db75e4b872256215cd06102c854afde7bf872b2040a924764"
+    },
+    {
+      "path": "polynet/model.py",
+      "source_path": "polynet/model.py",
+      "size_bytes": 14730,
+      "sha256": "13155386ee2d0c759ad63b563d5c0b3507486691b0b513f530335049e9435ab2"
+    },
+    {
+      "path": "polynet/policy.py",
+      "source_path": "polynet/policy.py",
+      "size_bytes": 3922,
+      "sha256": "581e4f488368af03b7e32378308786ea0e35c4ee755cfee5fea3d8b112591954"
+    },
+    {
+      "path": "polynet/train.py",
+      "source_path": "polynet/train.py",
+      "size_bytes": 34125,
+      "sha256": "c6faf565e2a49f33c93b39f92a5fd2c28abda3af9254cc6b72bcfe6e07b7ceef"
+    },
+    {
+      "path": "problems/__init__.py",
+      "source_path": "problems/__init__.py",
+      "size_bytes": 365,
+      "sha256": "3c46c5949b5a93be2a9db43e6980aeb55a9dd00a7f104fed76975e6e367d44f6"
+    },
+    {
+      "path": "problems/_data.py",
+      "source_path": "problems/_data.py",
+      "size_bytes": 2982,
+      "sha256": "86ec555fa9c59aab33a7b5880142147905093c9a29132dc1aef2db7c6441e7b3"
+    },
+    {
+      "path": "problems/_data_dtw.py",
+      "source_path": "problems/_data_dtw.py",
+      "size_bytes": 6260,
+      "sha256": "cbb3e6c6cddd32ac10e8951be686748ab97ccbc519a3a80c88938b73b8014b17"
+    },
+    {
+      "path": "problems/_data_sdtw.py",
+      "source_path": "problems/_data_sdtw.py",
+      "size_bytes": 4219,
+      "sha256": "6cf630d8aef4d84eef9785d9121fccb114cb740eaf6ac9db7184131df3f4a774"
+    },
+    {
+      "path": "problems/_data_tw.py",
+      "source_path": "problems/_data_tw.py",
+      "size_bytes": 3234,
+      "sha256": "193fb6ace4d919284589661807f18d18d194bbc685808c7d98660677c218e26e"
+    },
+    {
+      "path": "problems/_env.py",
+      "source_path": "problems/_env.py",
+      "size_bytes": 4812,
+      "sha256": "a7f71daa8299d6ffd658285957b23b3efd19aded6e377ba01dab7a2dee2cc9e4"
+    },
+    {
+      "path": "problems/_env_dtw.py",
+      "source_path": "problems/_env_dtw.py",
+      "size_bytes": 5282,
+      "sha256": "8204f17852ae4ecfad93c385f0e1b4e55bd9484ebf355d2a894ac9b4c5409f4a"
+    },
+    {
+      "path": "problems/_env_sdtw.py",
+      "source_path": "problems/_env_sdtw.py",
+      "size_bytes": 3029,
+      "sha256": "1b48e6b787711e99ffadb0219f7ee0984171745c7c7ccd7430dc49d86192ccd2"
+    },
+    {
+      "path": "problems/_env_stw.py",
+      "source_path": "problems/_env_stw.py",
+      "size_bytes": 2544,
+      "sha256": "1b57c4e2f2e5f65ac8ac6ffde82d88787090678dc210f7699dab8292fdaf298e"
+    },
+    {
+      "path": "problems/_env_tw.py",
+      "source_path": "problems/_env_tw.py",
+      "size_bytes": 1565,
+      "sha256": "a59d820cc3fcf81afc03d5e400c0a8e4b4db5e2dd9aff7df9663947eaa1a778e"
+    },
+    {
+      "path": "ref_model/__init__.py",
+      "source_path": "ref_model/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ref_model/model/__init__.py",
+      "source_path": "ref_model/model/__init__.py",
+      "size_bytes": 26,
+      "sha256": "8707b58f83928af4594e9b568ed6f3bab4ce54e6ee65f3f547af49c8be61343a"
+    },
+    {
+      "path": "ref_model/model/vectra.py",
+      "source_path": "ref_model/model/vectra.py",
+      "size_bytes": 20462,
+      "sha256": "c958cf6e1252a25946b915b9ba149c69505eb72eea60464d9f389b0651ca418d"
+    },
+    {
+      "path": "requirements.txt",
+      "source_path": "requirements.txt",
+      "size_bytes": 2131,
+      "sha256": "4975553febf10094926787d45dec8b57bbaa44ef3379d2cf16f6c93a296e9c00"
+    },
+    {
+      "path": "rl4co/__init__.py",
+      "source_path": "rl4co/__init__.py",
+      "size_bytes": 243,
+      "sha256": "66763b77105763e9b77b5712ffb3adf670e11f2844f01557b44f0ba5d5ad7e9c"
+    },
+    {
+      "path": "rl4co/data/__init__.py",
+      "source_path": "rl4co/data/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl4co/data/dataset.py",
+      "source_path": "rl4co/data/dataset.py",
+      "size_bytes": 4186,
+      "sha256": "aa807959b5dae679f5d57b14bc07fc482a93c69dd17fbce8c34cb1d107c458f4"
+    },
+    {
+      "path": "rl4co/data/generate_data.py",
+      "source_path": "rl4co/data/generate_data.py",
+      "size_bytes": 14812,
+      "sha256": "dde844932dc401be849c78e31d96c4a714b7c368778327e00e57dcadc8091311"
+    },
+    {
+      "path": "rl4co/data/transforms.py",
+      "source_path": "rl4co/data/transforms.py",
+      "size_bytes": 5464,
+      "sha256": "dc46a1b4fe9e3dfb2c9019b446eaefe3492bf03de5a49c9e6d960e5dd6ea17f0"
+    },
+    {
+      "path": "rl4co/data/utils.py",
+      "source_path": "rl4co/data/utils.py",
+      "size_bytes": 2161,
+      "sha256": "8cccee6c53fe4ba1e9d2a34bec40af2c4a3a10696daf9ec19c10e91703600ae0"
+    },
+    {
+      "path": "rl4co/envs/__init__.py",
+      "source_path": "rl4co/envs/__init__.py",
+      "size_bytes": 1698,
+      "sha256": "53d094f1d8358700a55a094a9288b85887235861eeb1c4ca59d2ce202388a0ef"
+    },
+    {
+      "path": "rl4co/envs/common/__init__.py",
+      "source_path": "rl4co/envs/common/__init__.py",
+      "size_bytes": 73,
+      "sha256": "951d4bc8f9a585ae1135116d9f1905bb4b7b948610909f33df0ffc10323f2756"
+    },
+    {
+      "path": "rl4co/envs/common/base.py",
+      "source_path": "rl4co/envs/common/base.py",
+      "size_bytes": 16754,
+      "sha256": "1bd15686239d80d96f8f39cf506eded04a8f526dee32a1e20c2e87dfd7621d5a"
+    },
+    {
+      "path": "rl4co/envs/common/distribution_utils.py",
+      "source_path": "rl4co/envs/common/distribution_utils.py",
+      "size_bytes": 9982,
+      "sha256": "a049ac5cdc9ef22a79b9a2e3b4b16330b6c172518f9d71ddd2e9c074215323dd"
+    },
+    {
+      "path": "rl4co/envs/common/utils.py",
+      "source_path": "rl4co/envs/common/utils.py",
+      "size_bytes": 4280,
+      "sha256": "f411c393dbaeb8309854b92011d0dadd4ce06fd7c8b7fa78e1b4a3d1e01528d1"
+    },
+    {
+      "path": "rl4co/envs/eda/__init__.py",
+      "source_path": "rl4co/envs/eda/__init__.py",
+      "size_bytes": 86,
+      "sha256": "4f4e034f7c888ef405173d930d2f5d87623944c321fa1a83f7d10da5a670399f"
+    },
+    {
+      "path": "rl4co/envs/eda/dpp/env.py",
+      "source_path": "rl4co/envs/eda/dpp/env.py",
+      "size_bytes": 8111,
+      "sha256": "e8ffbff018ad7b9989f5ad1bd27bb330916289f17019d690922bceb70272d08e"
+    },
+    {
+      "path": "rl4co/envs/eda/dpp/generator.py",
+      "source_path": "rl4co/envs/eda/dpp/generator.py",
+      "size_bytes": 6357,
+      "sha256": "9e8b86a342748a4e8c3edb6b07bf1a66196a938be1095d0d9b924122339aaac0"
+    },
+    {
+      "path": "rl4co/envs/eda/dpp/render.py",
+      "source_path": "rl4co/envs/eda/dpp/render.py",
+      "size_bytes": 2446,
+      "sha256": "88e132667a302b296ce9aa725bc36b1a6a48bd07ed8524e09cdd06297596e149"
+    },
+    {
+      "path": "rl4co/envs/eda/mdpp/env.py",
+      "source_path": "rl4co/envs/eda/mdpp/env.py",
+      "size_bytes": 5005,
+      "sha256": "8d5ae6f90d252854ff7e99bef8e5d08182d1e7f9f40175a282285b40499625f5"
+    },
+    {
+      "path": "rl4co/envs/eda/mdpp/generator.py",
+      "source_path": "rl4co/envs/eda/mdpp/generator.py",
+      "size_bytes": 6743,
+      "sha256": "0d68808e0415b736ab9982d0a25de8156a59b15c7aee212b5a2a9b6b9523bb51"
+    },
+    {
+      "path": "rl4co/envs/eda/mdpp/render.py",
+      "source_path": "rl4co/envs/eda/mdpp/render.py",
+      "size_bytes": 4825,
+      "sha256": "9e6ab5b9000bb12c691ff3b2909b6c06206549bda04789aec0bb3f8aea025dc2"
+    },
+    {
+      "path": "rl4co/envs/graph/__init__.py",
+      "source_path": "rl4co/envs/graph/__init__.py",
+      "size_bytes": 200,
+      "sha256": "6d3c886d775ea728ef5a0e773a5ae5ef5470484a300506f825ac5f6231484467"
+    },
+    {
+      "path": "rl4co/envs/graph/flp/__init__.py",
+      "source_path": "rl4co/envs/graph/flp/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl4co/envs/graph/flp/env.py",
+      "source_path": "rl4co/envs/graph/flp/env.py",
+      "size_bytes": 5523,
+      "sha256": "ede3468a5c04b84c812d929e288bf40a785a2098fdec7a0d25eaea69c59fc11f"
+    },
+    {
+      "path": "rl4co/envs/graph/flp/generator.py",
+      "source_path": "rl4co/envs/graph/flp/generator.py",
+      "size_bytes": 2500,
+      "sha256": "f3fc3a41d5805ac6d6dd9006f2700e3d334a44a8070603a4d19a5638abc2d4c1"
+    },
+    {
+      "path": "rl4co/envs/graph/mcp/__init__.py",
+      "source_path": "rl4co/envs/graph/mcp/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl4co/envs/graph/mcp/env.py",
+      "source_path": "rl4co/envs/graph/mcp/env.py",
+      "size_bytes": 7092,
+      "sha256": "ab75050677dcc9853215375231dc9e63db5e07643be92494e9792b8d0acc5da0"
+    },
+    {
+      "path": "rl4co/envs/graph/mcp/generator.py",
+      "source_path": "rl4co/envs/graph/mcp/generator.py",
+      "size_bytes": 4784,
+      "sha256": "fd8feac327ea71260c565a3185194870d603034ce98a692c4e95e61f4fb56a6c"
+    },
+    {
+      "path": "rl4co/envs/routing/__init__.py",
+      "source_path": "rl4co/envs/routing/__init__.py",
+      "size_bytes": 1509,
+      "sha256": "195bffdb587e1573a004d90f53b6598c5c0f30d428951220d476248c8003ff0b"
+    },
+    {
+      "path": "rl4co/envs/routing/atsp/env.py",
+      "source_path": "rl4co/envs/routing/atsp/env.py",
+      "size_bytes": 5509,
+      "sha256": "2ead73567caf8fffeab13860c14555af882605d6d666d1fb1b4f8ec3d42ce330"
+    },
+    {
+      "path": "rl4co/envs/routing/atsp/generator.py",
+      "source_path": "rl4co/envs/routing/atsp/generator.py",
+      "size_bytes": 2488,
+      "sha256": "f8bfe32f512403e9aa605ea8bf895aa66f9b1ae09ac0d6fa686c9a7b56a3f254"
+    },
+    {
+      "path": "rl4co/envs/routing/atsp/render.py",
+      "source_path": "rl4co/envs/routing/atsp/render.py",
+      "size_bytes": 1247,
+      "sha256": "9bdd28444456d448fb0b341ea91b3a704d150f4dd11df65f95117adb25a43204"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrp/README.md",
+      "source_path": "rl4co/envs/routing/cvrp/README.md",
+      "size_bytes": 1083,
+      "sha256": "b061e08046dce2a1cacdd9e6d2e67c543ec67eeca843055931bfe1c75b69b319"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrp/env.py",
+      "source_path": "rl4co/envs/routing/cvrp/env.py",
+      "size_bytes": 9796,
+      "sha256": "0ece8144844a720e56b70908d78615ae717481a25e838dc79e102501b83d32f1"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrp/generator.py",
+      "source_path": "rl4co/envs/routing/cvrp/generator.py",
+      "size_bytes": 4982,
+      "sha256": "1138ec4db798af0b553c43741638e6961fb3d4466fde1887a6faa936df1f24fd"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrp/local_search.py",
+      "source_path": "rl4co/envs/routing/cvrp/local_search.py",
+      "size_bytes": 14904,
+      "sha256": "b3dc9a82ca00de04e4bebe6f363074eb68b49194eff2efe4143a06f6008fd6b1"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrp/render.py",
+      "source_path": "rl4co/envs/routing/cvrp/render.py",
+      "size_bytes": 3715,
+      "sha256": "50498b2eb5856f5df60b92ddc410b2848d73723125bd3e27b0cf7639943675da"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrpmvc/env.py",
+      "source_path": "rl4co/envs/routing/cvrpmvc/env.py",
+      "size_bytes": 3766,
+      "sha256": "1dc41f0247313f0eb7e4bc12b80d8dc93e38f1c8e6027a8153b5427b2ec92f16"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrptw/env.py",
+      "source_path": "rl4co/envs/routing/cvrptw/env.py",
+      "size_bytes": 11558,
+      "sha256": "e5a718b1f4ce83c054f9bf5e1a99113b5d48b8a4e9a919cd52198560371055f3"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrptw/generator.py",
+      "source_path": "rl4co/envs/routing/cvrptw/generator.py",
+      "size_bytes": 6604,
+      "sha256": "26dd8bc7a2ec9ced266c2e19b96b2da6177895f10d88f6e603de5468605fbec9"
+    },
+    {
+      "path": "rl4co/envs/routing/cvrptw/render.py",
+      "source_path": "rl4co/envs/routing/cvrptw/render.py",
+      "size_bytes": 3370,
+      "sha256": "ed7badac684dbd3a1e49c531d7eb290666c4049342185db79680d5378ad019f1"
+    },
+    {
+      "path": "rl4co/envs/routing/mdcpdp/env.py",
+      "source_path": "rl4co/envs/routing/mdcpdp/env.py",
+      "size_bytes": 16823,
+      "sha256": "7ff00c7a118317db1f0a8eff029a7235b03f623c35f8dff5c04329af4e0132c7"
+    },
+    {
+      "path": "rl4co/envs/routing/mdcpdp/generator.py",
+      "source_path": "rl4co/envs/routing/mdcpdp/generator.py",
+      "size_bytes": 4805,
+      "sha256": "08b6bd96d1bb81ddf074cd44618ed19bd1074b43ae1f5f653fffe7d5c6d00da5"
+    },
+    {
+      "path": "rl4co/envs/routing/mdcpdp/render.py",
+      "source_path": "rl4co/envs/routing/mdcpdp/render.py",
+      "size_bytes": 4810,
+      "sha256": "bc5d5d1d1a1aefdaa8b3e3bcf741c93f9769aa4b525b82d7b566ea318b9d23f5"
+    },
+    {
+      "path": "rl4co/envs/routing/mpdp/env.py",
+      "source_path": "rl4co/envs/routing/mpdp/env.py",
+      "size_bytes": 14921,
+      "sha256": "7f1d2f55850e9dbf8e67422f50fa19ffbef001ef60a08ebb34d7d4534734432f"
+    },
+    {
+      "path": "rl4co/envs/routing/mpdp/generator.py",
+      "source_path": "rl4co/envs/routing/mpdp/generator.py",
+      "size_bytes": 3315,
+      "sha256": "8a874fdb0c50ff19c234c20bae1edd3f83ea588ba80d69880256ec6748a83731"
+    },
+    {
+      "path": "rl4co/envs/routing/mpdp/render.py",
+      "source_path": "rl4co/envs/routing/mpdp/render.py",
+      "size_bytes": 2648,
+      "sha256": "d3ec61f9a9ed2ea3e3ce255326844960bc491c9d7bdba294c2af0b65346733d1"
+    },
+    {
+      "path": "rl4co/envs/routing/mtsp/env.py",
+      "source_path": "rl4co/envs/routing/mtsp/env.py",
+      "size_bytes": 8769,
+      "sha256": "8660665d40d8a121de361c7278404ea207857c0f093053caad4d8fe759b91428"
+    },
+    {
+      "path": "rl4co/envs/routing/mtsp/generator.py",
+      "source_path": "rl4co/envs/routing/mtsp/generator.py",
+      "size_bytes": 2213,
+      "sha256": "1f7e5b33054a0422367a050a017e337b2811eac2bb44998ff49cc26ab6b73a9a"
+    },
+    {
+      "path": "rl4co/envs/routing/mtsp/render.py",
+      "source_path": "rl4co/envs/routing/mtsp/render.py",
+      "size_bytes": 2651,
+      "sha256": "2461b3e013ec9e3081c97cf15238d0d7e6ec7310bab78e0f3e3b605352a912a3"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/constants.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/constants.py",
+      "size_bytes": 1169,
+      "sha256": "d9141e18ec3f6261137ccb2bd8e7e71a29cecbc413ab5a61f86c04e0ec198df4"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/lkh.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/lkh.py",
+      "size_bytes": 6979,
+      "sha256": "b1b6eab4bb55dc175be7e55d00849fb03597d4e752b76feccd893449c1e2f75e"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/ortools.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/ortools.py",
+      "size_bytes": 8291,
+      "sha256": "c3d6400181f44620c85830378134436692e44339380214d7fefb2b8c5f6d8684"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/pyvrp.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/pyvrp.py",
+      "size_bytes": 3670,
+      "sha256": "b23e6d38f1a6c2ef77fe0dbbe9711ee5b8a34f447859612beb8ad44127154d0e"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/solve.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/solve.py",
+      "size_bytes": 2402,
+      "sha256": "09c2784c9c438df8f93f799869e79249a55cfeae0d3b2a815b1bb79c79e567b2"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/baselines/utils.py",
+      "source_path": "rl4co/envs/routing/mtvrp/baselines/utils.py",
+      "size_bytes": 1140,
+      "sha256": "51eb8abc7f6a36af63231bdcd13444e494b00b1c1e6564d27814d1a384690bfa"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/env.py",
+      "source_path": "rl4co/envs/routing/mtvrp/env.py",
+      "size_bytes": 21736,
+      "sha256": "5b743b625e598d6e150a294b184ef363321b9ce91740bddbbb33c20519a7f391"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/generator.py",
+      "source_path": "rl4co/envs/routing/mtvrp/generator.py",
+      "size_bytes": 17957,
+      "sha256": "113a0b7c89320d8d896880233109bb3cc30475e7be1c763cb7e90233934e8ca8"
+    },
+    {
+      "path": "rl4co/envs/routing/mtvrp/render.py",
+      "source_path": "rl4co/envs/routing/mtvrp/render.py",
+      "size_bytes": 4000,
+      "sha256": "d4edebb4bdaf48240ad22b40777c1f3b2648592d65f3a86945c5a1341b203bea"
+    },
+    {
+      "path": "rl4co/envs/routing/op/env.py",
+      "source_path": "rl4co/envs/routing/op/env.py",
+      "size_bytes": 9201,
+      "sha256": "533883a0910156d834de0afc7829d05fcb612f51a820a0a5b71f2b8747a61b1d"
+    },
+    {
+      "path": "rl4co/envs/routing/op/generator.py",
+      "source_path": "rl4co/envs/routing/op/generator.py",
+      "size_bytes": 5711,
+      "sha256": "6150ad9056c8e78376f000971e1ab9aa53b7e0b092eef767decef1101ef1ffc7"
+    },
+    {
+      "path": "rl4co/envs/routing/op/render.py",
+      "source_path": "rl4co/envs/routing/op/render.py",
+      "size_bytes": 2179,
+      "sha256": "d9e423cb862f281026bdf47120a38322534ae306efe7643b531cd8bceac28ab5"
+    },
+    {
+      "path": "rl4co/envs/routing/pctsp/env.py",
+      "source_path": "rl4co/envs/routing/pctsp/env.py",
+      "size_bytes": 9555,
+      "sha256": "25d681904f8b8c0b6c93617d09c3bb9a4929a6d8bdbf7e379c9ebbd0c890a812"
+    },
+    {
+      "path": "rl4co/envs/routing/pctsp/generator.py",
+      "source_path": "rl4co/envs/routing/pctsp/generator.py",
+      "size_bytes": 6452,
+      "sha256": "b9c2884b15d42cc33a9022696cd66d69ab0b20f07a2fbc5bb69f81abef6e5216"
+    },
+    {
+      "path": "rl4co/envs/routing/pctsp/render.py",
+      "source_path": "rl4co/envs/routing/pctsp/render.py",
+      "size_bytes": 2565,
+      "sha256": "f4413e7b5808260b560ec1205d3228fcb6096d2c56b193321005494bcdcbd5d6"
+    },
+    {
+      "path": "rl4co/envs/routing/pdp/env.py",
+      "source_path": "rl4co/envs/routing/pdp/env.py",
+      "size_bytes": 19346,
+      "sha256": "bd93746e71c61446bc81e9089386a69ce51f202aa80089253ed63b2229d6cafc"
+    },
+    {
+      "path": "rl4co/envs/routing/pdp/generator.py",
+      "source_path": "rl4co/envs/routing/pdp/generator.py",
+      "size_bytes": 5965,
+      "sha256": "d7b6e8658d28aa66aaf5bde2732fe04e4f385434d42cb7738f094faff6d83c5d"
+    },
+    {
+      "path": "rl4co/envs/routing/pdp/render.py",
+      "source_path": "rl4co/envs/routing/pdp/render.py",
+      "size_bytes": 4180,
+      "sha256": "bdabfc23e8b5d2385405503d13920f25cde78b3f71c168f6d69d28f2c8cce691"
+    },
+    {
+      "path": "rl4co/envs/routing/sdvrp/env.py",
+      "source_path": "rl4co/envs/routing/sdvrp/env.py",
+      "size_bytes": 7402,
+      "sha256": "10d443f14e9af96c1a242905cfc520a4b606adadf646a75228b8f75deb14ae65"
+    },
+    {
+      "path": "rl4co/envs/routing/shpp/env.py",
+      "source_path": "rl4co/envs/routing/shpp/env.py",
+      "size_bytes": 6395,
+      "sha256": "a3da7084b56323732e649cf9fe65306edefaab3799f48eff70dbd28f855c742c"
+    },
+    {
+      "path": "rl4co/envs/routing/shpp/generator.py",
+      "source_path": "rl4co/envs/routing/shpp/generator.py",
+      "size_bytes": 1606,
+      "sha256": "d543f7cbfeedaad2140a0ab3a1dd5715df84e5b37a8830753b644cd52cd0279b"
+    },
+    {
+      "path": "rl4co/envs/routing/shpp/render.py",
+      "source_path": "rl4co/envs/routing/shpp/render.py",
+      "size_bytes": 1587,
+      "sha256": "00478906c7becf1456bb37a8bcab5cc619d53066372d01677958386445b2d4f9"
+    },
+    {
+      "path": "rl4co/envs/routing/spctsp/env.py",
+      "source_path": "rl4co/envs/routing/spctsp/env.py",
+      "size_bytes": 771,
+      "sha256": "1a8feb5da73fccc2b8328b919e5c0e811f0e85555b6c1723358edac78c1ae04b"
+    },
+    {
+      "path": "rl4co/envs/routing/svrp/env.py",
+      "source_path": "rl4co/envs/routing/svrp/env.py",
+      "size_bytes": 9600,
+      "sha256": "aaa436a8e64308eb72e3777744925d5062d4c6bdf821d56de2a0c847efefb958"
+    },
+    {
+      "path": "rl4co/envs/routing/svrp/generator.py",
+      "source_path": "rl4co/envs/routing/svrp/generator.py",
+      "size_bytes": 4169,
+      "sha256": "bebe016eb5932cc8b1071d38443d49d15aae9684e0254c721b6df6cc171b7670"
+    },
+    {
+      "path": "rl4co/envs/routing/svrp/render.py",
+      "source_path": "rl4co/envs/routing/svrp/render.py",
+      "size_bytes": 2565,
+      "sha256": "461aa096c9a3da5b33b23170516f6726e5b4a7e55ce9113abe150ca756b0c0f8"
+    },
+    {
+      "path": "rl4co/envs/routing/tsp/env.py",
+      "source_path": "rl4co/envs/routing/tsp/env.py",
+      "size_bytes": 21254,
+      "sha256": "d8462b51f35fbdad162f473637b461dbb57f621ff82fd4aafc6135ab24627dba"
+    },
+    {
+      "path": "rl4co/envs/routing/tsp/generator.py",
+      "source_path": "rl4co/envs/routing/tsp/generator.py",
+      "size_bytes": 3414,
+      "sha256": "56417a0e193c86a2218f9a8d0662f2b82cd9caf295b62f3ab0658be8f16fb7c3"
+    },
+    {
+      "path": "rl4co/envs/routing/tsp/local_search.py",
+      "source_path": "rl4co/envs/routing/tsp/local_search.py",
+      "size_bytes": 2806,
+      "sha256": "c8c9135b0ad4e10a4e4ed0b32d5acab3775f4630d454a2da436d40ef199be7f3"
+    },
+    {
+      "path": "rl4co/envs/routing/tsp/render.py",
+      "source_path": "rl4co/envs/routing/tsp/render.py",
+      "size_bytes": 3320,
+      "sha256": "6bd2b32b3ab803dab3990b52fee7bdb32d063f7515f6e99c2694274287964d6e"
+    },
+    {
+      "path": "rl4co/envs/scheduling/__init__.py",
+      "source_path": "rl4co/envs/scheduling/__init__.py",
+      "size_bytes": 124,
+      "sha256": "381cf8bb10dffae8a452b744a4f0b6c77da1fb82d799f95915914f13fc668729"
+    },
+    {
+      "path": "rl4co/envs/scheduling/ffsp/env.py",
+      "source_path": "rl4co/envs/scheduling/ffsp/env.py",
+      "size_bytes": 17462,
+      "sha256": "99dc41bbdd1ff91443817c7567ec939399aa836ae5f6d6afef3118d50aa8c338"
+    },
+    {
+      "path": "rl4co/envs/scheduling/ffsp/generator.py",
+      "source_path": "rl4co/envs/scheduling/ffsp/generator.py",
+      "size_bytes": 2009,
+      "sha256": "4da013952a48e265f80357332ae8b1022a9537edfef5337fe67694d99c76ca98"
+    },
+    {
+      "path": "rl4co/envs/scheduling/ffsp/render.py",
+      "source_path": "rl4co/envs/scheduling/ffsp/render.py",
+      "size_bytes": 1892,
+      "sha256": "b78182b8155460fa9ab4308cae2dee232202979528f8b46ce371a7a3a8d3b973"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/__init__.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/__init__.py",
+      "size_bytes": 35,
+      "sha256": "ae90bda84022774953bdce7b1849d67a625cc44f4d0b0631e74802cd5bd3573e"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/env.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/env.py",
+      "size_bytes": 19811,
+      "sha256": "dd87fc296b812c2df4ae500d5360a308b5e3536d5b6526731ceda54f3dacdc64"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/generator.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/generator.py",
+      "size_bytes": 8824,
+      "sha256": "db8b87cd85ebdd73815bea67c5352fa8288e4e7c0d77bf0a9625211826b64d4f"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/parser.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/parser.py",
+      "size_bytes": 5436,
+      "sha256": "53a82dbd45698d90ba9fcc1122212a80851c4305ed9f44e991edba8674556f68"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/render.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/render.py",
+      "size_bytes": 1944,
+      "sha256": "19bd8e11acbca2dec9a0e159b9ade4be61487f16f85cb86ecc55347d2e9a9741"
+    },
+    {
+      "path": "rl4co/envs/scheduling/fjsp/utils.py",
+      "source_path": "rl4co/envs/scheduling/fjsp/utils.py",
+      "size_bytes": 14504,
+      "sha256": "f89ad38e4a6b519c01237aca84595fc289cb31d630f2f742357a8d449b4f1a5e"
+    },
+    {
+      "path": "rl4co/envs/scheduling/jssp/env.py",
+      "source_path": "rl4co/envs/scheduling/jssp/env.py",
+      "size_bytes": 5228,
+      "sha256": "ad0ebf648f027ae1548fcaab644bbdcd0bef7a39d89021a69b08a08399fd136c"
+    },
+    {
+      "path": "rl4co/envs/scheduling/jssp/generator.py",
+      "source_path": "rl4co/envs/scheduling/jssp/generator.py",
+      "size_bytes": 7609,
+      "sha256": "84b92d1ad7c66222dc8d35a438a044f458977a08a0c67a42083bf8ae19ef36de"
+    },
+    {
+      "path": "rl4co/envs/scheduling/jssp/parser.py",
+      "source_path": "rl4co/envs/scheduling/jssp/parser.py",
+      "size_bytes": 3174,
+      "sha256": "2f808529f3363cfc71d452233f4160271d3a9c3b69ea3d0182d645b8db47e33e"
+    },
+    {
+      "path": "rl4co/envs/scheduling/smtwtp/env.py",
+      "source_path": "rl4co/envs/scheduling/smtwtp/env.py",
+      "size_bytes": 7520,
+      "sha256": "191467b78bb33d9b574f0786acc6ba735e3a5f9a3ee920ab2f31b9f738c1d5cb"
+    },
+    {
+      "path": "rl4co/envs/scheduling/smtwtp/generator.py",
+      "source_path": "rl4co/envs/scheduling/smtwtp/generator.py",
+      "size_bytes": 3269,
+      "sha256": "703486382e68085e68a935150f3bbc32f6f20ab6c6750da11099a474fe88be8a"
+    },
+    {
+      "path": "rl4co/envs/scheduling/smtwtp/render.py",
+      "source_path": "rl4co/envs/scheduling/smtwtp/render.py",
+      "size_bytes": 205,
+      "sha256": "d6b1d9ace123217f3b5644db5b8b1c10ce6fab2385a2c2d20ce012ce28717907"
+    },
+    {
+      "path": "rl4co/models/__init__.py",
+      "source_path": "rl4co/models/__init__.py",
+      "size_bytes": 1973,
+      "sha256": "58bbcd62ae5ee16f14f2d8590e01a5e5523be3ddaef5d743cc3fd290f0af047a"
+    },
+    {
+      "path": "rl4co/models/common/__init__.py",
+      "source_path": "rl4co/models/common/__init__.py",
+      "size_bytes": 615,
+      "sha256": "0922257c379938dc5531a96b382c17d5f43850aef836b7705da5cd0c13acd8ac"
+    },
+    {
+      "path": "rl4co/models/common/constructive/__init__.py",
+      "source_path": "rl4co/models/common/constructive/__init__.py",
+      "size_bytes": 428,
+      "sha256": "9a9bffe232d990f97072a721030f958f212c281873ebd808a697fe8af8392c40"
+    },
+    {
+      "path": "rl4co/models/common/constructive/autoregressive/__init__.py",
+      "source_path": "rl4co/models/common/constructive/autoregressive/__init__.py",
+      "size_bytes": 268,
+      "sha256": "3ef8cd3fc1f6b5c1282d138b18c6770295d21bf08237b3746052e417a3f2d224"
+    },
+    {
+      "path": "rl4co/models/common/constructive/autoregressive/decoder.py",
+      "source_path": "rl4co/models/common/constructive/autoregressive/decoder.py",
+      "size_bytes": 509,
+      "sha256": "aa8b0620e84c2366ce23ade550a2632b00584da833f81308c55881d66096e3e3"
+    },
+    {
+      "path": "rl4co/models/common/constructive/autoregressive/encoder.py",
+      "source_path": "rl4co/models/common/constructive/autoregressive/encoder.py",
+      "size_bytes": 510,
+      "sha256": "3e4c885d445d52395401d9a3bf00123f9c181a6b609c00f8f6c92fdb15a6ac0e"
+    },
+    {
+      "path": "rl4co/models/common/constructive/autoregressive/policy.py",
+      "source_path": "rl4co/models/common/constructive/autoregressive/policy.py",
+      "size_bytes": 1664,
+      "sha256": "97f6a594d8581132e739738ff84e8f285ddd0d3c5d6ae392cff6e8b506650c58"
+    },
+    {
+      "path": "rl4co/models/common/constructive/base.py",
+      "source_path": "rl4co/models/common/constructive/base.py",
+      "size_bytes": 10847,
+      "sha256": "215641147029d7a4ffff032e2088368bde81423f98002139849422642659ad10"
+    },
+    {
+      "path": "rl4co/models/common/constructive/nonautoregressive/__init__.py",
+      "source_path": "rl4co/models/common/constructive/nonautoregressive/__init__.py",
+      "size_bytes": 286,
+      "sha256": "9d0608a810f591e1ca0914751c5440d7cd613315df26da7e14996e62d8d55888"
+    },
+    {
+      "path": "rl4co/models/common/constructive/nonautoregressive/decoder.py",
+      "source_path": "rl4co/models/common/constructive/nonautoregressive/decoder.py",
+      "size_bytes": 1531,
+      "sha256": "7ea11859e3b54c764c710142d19c69651f68f47dc498b6bf434f704bc166173e"
+    },
+    {
+      "path": "rl4co/models/common/constructive/nonautoregressive/encoder.py",
+      "source_path": "rl4co/models/common/constructive/nonautoregressive/encoder.py",
+      "size_bytes": 513,
+      "sha256": "7fd696255019dc740f20d55acb885588b039131ea4b5ab48566abb622ce94e60"
+    },
+    {
+      "path": "rl4co/models/common/constructive/nonautoregressive/policy.py",
+      "source_path": "rl4co/models/common/constructive/nonautoregressive/policy.py",
+      "size_bytes": 1383,
+      "sha256": "b86ef24fc44fa177302c5c46f23f81f1c5144af92b2c3ccfbfbbcd88890bcacf"
+    },
+    {
+      "path": "rl4co/models/common/improvement/__init__.py",
+      "source_path": "rl4co/models/common/improvement/__init__.py",
+      "size_bytes": 124,
+      "sha256": "8b3b8902c72dda780880e28222430e37fe91e2da5e6d393515160889779502ac"
+    },
+    {
+      "path": "rl4co/models/common/improvement/base.py",
+      "source_path": "rl4co/models/common/improvement/base.py",
+      "size_bytes": 5121,
+      "sha256": "73b82db6541526a03071bd34b20efec30e22ab4e8d1d6444b7dbc387124b186c"
+    },
+    {
+      "path": "rl4co/models/common/transductive/__init__.py",
+      "source_path": "rl4co/models/common/transductive/__init__.py",
+      "size_bytes": 68,
+      "sha256": "2febd87a0833ace447d4f7bc125d4b980624453574d0dee60683a54c6af9a731"
+    },
+    {
+      "path": "rl4co/models/common/transductive/base.py",
+      "source_path": "rl4co/models/common/transductive/base.py",
+      "size_bytes": 3252,
+      "sha256": "4a854b927536c04676dcbcb5591598706dee40122417d8e677dc2d09a1fa3136"
+    },
+    {
+      "path": "rl4co/models/nn/attention.py",
+      "source_path": "rl4co/models/nn/attention.py",
+      "size_bytes": 21025,
+      "sha256": "bd2f8aa5d93c78f6679a7b147b1bc4281552ccc661ca9a004fb9d9c36b89b100"
+    },
+    {
+      "path": "rl4co/models/nn/env_embeddings/__init__.py",
+      "source_path": "rl4co/models/nn/env_embeddings/__init__.py",
+      "size_bytes": 280,
+      "sha256": "ba01ee9310f79953943e5117905b2631b71d65fab2c2925be505d7614cc50811"
+    },
+    {
+      "path": "rl4co/models/nn/env_embeddings/context.py",
+      "source_path": "rl4co/models/nn/env_embeddings/context.py",
+      "size_bytes": 16189,
+      "sha256": "9fe76200e12bd020f04a57a49204feeb1badd543d438eedd70763fbb11e0042f"
+    },
+    {
+      "path": "rl4co/models/nn/env_embeddings/dynamic.py",
+      "source_path": "rl4co/models/nn/env_embeddings/dynamic.py",
+      "size_bytes": 4744,
+      "sha256": "570be641b186d57e8e70ac47a8a34487786ec656948ad337fb2658d780e32c54"
+    },
+    {
+      "path": "rl4co/models/nn/env_embeddings/edge.py",
+      "source_path": "rl4co/models/nn/env_embeddings/edge.py",
+      "size_bytes": 11296,
+      "sha256": "ba7826109ba622967a8fd26d92b7d2b6dbd6b2d178286f8f44aee2ccd90ce3b9"
+    },
+    {
+      "path": "rl4co/models/nn/env_embeddings/init.py",
+      "source_path": "rl4co/models/nn/env_embeddings/init.py",
+      "size_bytes": 22759,
+      "sha256": "32af33a0624730f59a8c031da5af579b7ca691699664bb3eec216a22c0844fc1"
+    },
+    {
+      "path": "rl4co/models/nn/flash_attention.py",
+      "source_path": "rl4co/models/nn/flash_attention.py",
+      "size_bytes": 2673,
+      "sha256": "0173d1b85b7db7bffe6a4d8073050d93252eb1343593e2786dcde47a27acd986"
+    },
+    {
+      "path": "rl4co/models/nn/graph/attnnet.py",
+      "source_path": "rl4co/models/nn/graph/attnnet.py",
+      "size_bytes": 3646,
+      "sha256": "6ae3e969e8098ec7d1d5c54bcb3cf0a5e10a7fb0b04289f76981ee4531087b07"
+    },
+    {
+      "path": "rl4co/models/nn/graph/gcn.py",
+      "source_path": "rl4co/models/nn/graph/gcn.py",
+      "size_bytes": 3580,
+      "sha256": "718c24fa843745e3f1c54ef5ec171a5205a0d813f165374284f396af6ae64be5"
+    },
+    {
+      "path": "rl4co/models/nn/graph/gnn.py",
+      "source_path": "rl4co/models/nn/graph/gnn.py",
+      "size_bytes": 3700,
+      "sha256": "ee87483b28d79c181ba383d6de71554521b498a76a2465879452b608d84ab517"
+    },
+    {
+      "path": "rl4co/models/nn/graph/hgnn.py",
+      "source_path": "rl4co/models/nn/graph/hgnn.py",
+      "size_bytes": 4792,
+      "sha256": "0516bdc3b48126685db25d556f52a2d5c2e8cc5f3f5519af74db481b03351b07"
+    },
+    {
+      "path": "rl4co/models/nn/graph/mpnn.py",
+      "source_path": "rl4co/models/nn/graph/mpnn.py",
+      "size_bytes": 5427,
+      "sha256": "a0c53cae72365df5fa44ae0065e3645ed40de3620fefeef58789571a6a60d7f4"
+    },
+    {
+      "path": "rl4co/models/nn/mlp.py",
+      "source_path": "rl4co/models/nn/mlp.py",
+      "size_bytes": 2548,
+      "sha256": "4f3c2fbfcdca2d8483b1d4607de4a37b303c839d89aa6d03b550ef0e4d286fc0"
+    },
+    {
+      "path": "rl4co/models/nn/moe.py",
+      "source_path": "rl4co/models/nn/moe.py",
+      "size_bytes": 13474,
+      "sha256": "f22c3c4864318b2c32df6d2efe30677596c6f79d3d36b565dbe57232dc38d9ec"
+    },
+    {
+      "path": "rl4co/models/nn/ops.py",
+      "source_path": "rl4co/models/nn/ops.py",
+      "size_bytes": 4721,
+      "sha256": "4613014220de8b2466e9f73a95ada1d940a86d1c98c479d3b8fce94611153e6b"
+    },
+    {
+      "path": "rl4co/models/nn/pos_embeddings.py",
+      "source_path": "rl4co/models/nn/pos_embeddings.py",
+      "size_bytes": 5092,
+      "sha256": "0b9ea454e7de51cbc98fe36bffaef5490fd1861c210f1166e79a1296ab626698"
+    },
+    {
+      "path": "rl4co/models/rl/__init__.py",
+      "source_path": "rl4co/models/rl/__init__.py",
+      "size_bytes": 304,
+      "sha256": "49f9905294f2bffd09e419de0fe6ae8d4253f2ddba6e516a844c0f209a054679"
+    },
+    {
+      "path": "rl4co/models/rl/a2c/a2c.py",
+      "source_path": "rl4co/models/rl/a2c/a2c.py",
+      "size_bytes": 2366,
+      "sha256": "e67295b73a528d620b6da079e928d86ce7fc0dbb4a638e68988b18ae2a06721a"
+    },
+    {
+      "path": "rl4co/models/rl/common/base.py",
+      "source_path": "rl4co/models/rl/common/base.py",
+      "size_bytes": 14123,
+      "sha256": "8b0e53ce68cacb5eea9955bd3566058dea46636ab8c840c0555c9310b9f834a5"
+    },
+    {
+      "path": "rl4co/models/rl/common/critic.py",
+      "source_path": "rl4co/models/rl/common/critic.py",
+      "size_bytes": 2818,
+      "sha256": "40767ff028af6dc4c4f9064ef395bdd10cda57981c6b7a703ed228c4b3bbfeda"
+    },
+    {
+      "path": "rl4co/models/rl/common/utils.py",
+      "source_path": "rl4co/models/rl/common/utils.py",
+      "size_bytes": 1697,
+      "sha256": "bc119a262f5e0462bf611267e8e9c60da80c5503e129352eea078520acfa60c3"
+    },
+    {
+      "path": "rl4co/models/rl/ppo/__init__.py",
+      "source_path": "rl4co/models/rl/ppo/__init__.py",
+      "size_bytes": 199,
+      "sha256": "71f8560b4d43523b8d09f2218a5a234748e8ecdfe5361ce2c1adec78beafec0f"
+    },
+    {
+      "path": "rl4co/models/rl/ppo/n_step_ppo.py",
+      "source_path": "rl4co/models/rl/ppo/n_step_ppo.py",
+      "size_bytes": 10724,
+      "sha256": "26ca71d7970a4b82ff2b5a34e5b45d908abb8dba493f682a6a7635d6c3279b62"
+    },
+    {
+      "path": "rl4co/models/rl/ppo/ppo.py",
+      "source_path": "rl4co/models/rl/ppo/ppo.py",
+      "size_bytes": 10167,
+      "sha256": "60dc217c88ce532671d30c78ac697e2376dc715ad4c238120e5add9dd4b9a162"
+    },
+    {
+      "path": "rl4co/models/rl/ppo/stepwise_ppo.py",
+      "source_path": "rl4co/models/rl/ppo/stepwise_ppo.py",
+      "size_bytes": 6075,
+      "sha256": "694e85307b01689c28742fae84ba3a2af645285ea155e58765248ae1c4c679dd"
+    },
+    {
+      "path": "rl4co/models/rl/reinforce/baselines.py",
+      "source_path": "rl4co/models/rl/reinforce/baselines.py",
+      "size_bytes": 10592,
+      "sha256": "0d75d9df1ac1f41c975e8bf5a38c19e29473861c264e4c25ebcccb220f637484"
+    },
+    {
+      "path": "rl4co/models/rl/reinforce/reinforce.py",
+      "source_path": "rl4co/models/rl/reinforce/reinforce.py",
+      "size_bytes": 7619,
+      "sha256": "87745a164913a14fdb287c36e13e9963ae9ca52c98123b1caf7e657e92709823"
+    },
+    {
+      "path": "rl4co/models/zoo/__init__.py",
+      "source_path": "rl4co/models/zoo/__init__.py",
+      "size_bytes": 1336,
+      "sha256": "3f78de9652866b4358245f4ceff73839c3f590c1d5eca9c6b425c8b5be5b7512"
+    },
+    {
+      "path": "rl4co/models/zoo/active_search/__init__.py",
+      "source_path": "rl4co/models/zoo/active_search/__init__.py",
+      "size_bytes": 33,
+      "sha256": "7db3c38e6fd7070986a3635bc492cb768e3c964e1a9d5f3fa9fd6b6bab655301"
+    },
+    {
+      "path": "rl4co/models/zoo/active_search/search.py",
+      "source_path": "rl4co/models/zoo/active_search/search.py",
+      "size_bytes": 7431,
+      "sha256": "bca1f8a49214997e224e17eec9be6bd97dc5dc0c3ed846e9110389d41d0221a4"
+    },
+    {
+      "path": "rl4co/models/zoo/am/__init__.py",
+      "source_path": "rl4co/models/zoo/am/__init__.py",
+      "size_bytes": 75,
+      "sha256": "debcbc2e06b9b753262ae377f7a3bf01e9ce2c1815d46c91f47c1cd2c9c8d945"
+    },
+    {
+      "path": "rl4co/models/zoo/am/decoder.py",
+      "source_path": "rl4co/models/zoo/am/decoder.py",
+      "size_bytes": 8876,
+      "sha256": "9feca2d1ee33d3a645ade50743f9a54d6785cb94159ce82e8bf1002b8adb5d2e"
+    },
+    {
+      "path": "rl4co/models/zoo/am/encoder.py",
+      "source_path": "rl4co/models/zoo/am/encoder.py",
+      "size_bytes": 2877,
+      "sha256": "e8921159b13f0eb5bfee01b93fe8cac95efb24c6cc5176580acad53744cabd90"
+    },
+    {
+      "path": "rl4co/models/zoo/am/model.py",
+      "source_path": "rl4co/models/zoo/am/model.py",
+      "size_bytes": 1283,
+      "sha256": "78095e9d648121f42139d379f548c6c86bd4179a4f2738cc050c69d3941e696b"
+    },
+    {
+      "path": "rl4co/models/zoo/am/policy.py",
+      "source_path": "rl4co/models/zoo/am/policy.py",
+      "size_bytes": 5668,
+      "sha256": "3cc1d4257c7a8ace71f8dd6d3d33d845a58e2ab31187b272befd5d574597acd6"
+    },
+    {
+      "path": "rl4co/models/zoo/amppo/__init__.py",
+      "source_path": "rl4co/models/zoo/amppo/__init__.py",
+      "size_bytes": 25,
+      "sha256": "9d1ee5d5901e744a6d5fd73c80e6034bfe7d2a1c71c3ed127d66524916746ab9"
+    },
+    {
+      "path": "rl4co/models/zoo/amppo/model.py",
+      "source_path": "rl4co/models/zoo/amppo/model.py",
+      "size_bytes": 1606,
+      "sha256": "f4e59774db904bd87b5b63ef326fff274c4a144a8cb1185277d028a6f73656a7"
+    },
+    {
+      "path": "rl4co/models/zoo/dact/__init__.py",
+      "source_path": "rl4co/models/zoo/dact/__init__.py",
+      "size_bytes": 55,
+      "sha256": "b888a2fac75a4ac79804e250db9f0e8265363d768b1995a29c14c6be261de065"
+    },
+    {
+      "path": "rl4co/models/zoo/dact/decoder.py",
+      "source_path": "rl4co/models/zoo/dact/decoder.py",
+      "size_bytes": 4407,
+      "sha256": "4833efe9ed4d69561db9b159556116d8386effa914c4f8c7127f01eea45ab630"
+    },
+    {
+      "path": "rl4co/models/zoo/dact/encoder.py",
+      "source_path": "rl4co/models/zoo/dact/encoder.py",
+      "size_bytes": 8560,
+      "sha256": "40d5c28cfa59a3ea18a0ed2ec2a92e302fa7e7cf19bea7fa9236ed1dfa9ffad7"
+    },
+    {
+      "path": "rl4co/models/zoo/dact/model.py",
+      "source_path": "rl4co/models/zoo/dact/model.py",
+      "size_bytes": 2092,
+      "sha256": "435680db8a919710c9d1c6dcf1ca9702b2d03ccec5d6e037e12bc49cc5031dde"
+    },
+    {
+      "path": "rl4co/models/zoo/dact/policy.py",
+      "source_path": "rl4co/models/zoo/dact/policy.py",
+      "size_bytes": 7094,
+      "sha256": "8b2c3b77653ad08578ea34e96da2b5967b869bdbe2adf9cf944c172b68562da2"
+    },
+    {
+      "path": "rl4co/models/zoo/deepaco/__init__.py",
+      "source_path": "rl4co/models/zoo/deepaco/__init__.py",
+      "size_bytes": 109,
+      "sha256": "c8bd94a6a6f36f31c3133ef727b8722e35babded35bab0a73055c03d81fc8541"
+    },
+    {
+      "path": "rl4co/models/zoo/deepaco/antsystem.py",
+      "source_path": "rl4co/models/zoo/deepaco/antsystem.py",
+      "size_bytes": 12037,
+      "sha256": "9a67fadd57feadf09d0dfdc7df922a8544b70dc16b658b924fc0595f5b7662ce"
+    },
+    {
+      "path": "rl4co/models/zoo/deepaco/model.py",
+      "source_path": "rl4co/models/zoo/deepaco/model.py",
+      "size_bytes": 3529,
+      "sha256": "d7e5a5eeb752fcfaeaa76462e99e1680642aa8115d37c10d0ee26944ae36b3a8"
+    },
+    {
+      "path": "rl4co/models/zoo/deepaco/policy.py",
+      "source_path": "rl4co/models/zoo/deepaco/policy.py",
+      "size_bytes": 7655,
+      "sha256": "bf6db5bee6a17ac16b31fda1c40916bee93533a77c823bc16f5026509f99239f"
+    },
+    {
+      "path": "rl4co/models/zoo/eas/__init__.py",
+      "source_path": "rl4co/models/zoo/eas/__init__.py",
+      "size_bytes": 40,
+      "sha256": "8f884a192fb439fe46295f9d55e89d4646b72ffb2d92f37792f6300cfa938119"
+    },
+    {
+      "path": "rl4co/models/zoo/eas/decoder.py",
+      "source_path": "rl4co/models/zoo/eas/decoder.py",
+      "size_bytes": 4624,
+      "sha256": "bd599f1abb6cbe7df815e62716dae9be51785bb71fdf353cc99f89ce765c5687"
+    },
+    {
+      "path": "rl4co/models/zoo/eas/nn.py",
+      "source_path": "rl4co/models/zoo/eas/nn.py",
+      "size_bytes": 1328,
+      "sha256": "2a5944af6743159e94c3325f87b44d9248edbc1b9e059440526517bb14a31e76"
+    },
+    {
+      "path": "rl4co/models/zoo/eas/search.py",
+      "source_path": "rl4co/models/zoo/eas/search.py",
+      "size_bytes": 13454,
+      "sha256": "7a4915c639183dc29c474c38d6778b466e7f0129f906ce93432622ddae808978"
+    },
+    {
+      "path": "rl4co/models/zoo/gfacs/__init__.py",
+      "source_path": "rl4co/models/zoo/gfacs/__init__.py",
+      "size_bytes": 101,
+      "sha256": "8d7c0bb52bf3d53ca5e9e57d5063453f6e7ff9e23b1ddb1fa98c63348411226c"
+    },
+    {
+      "path": "rl4co/models/zoo/gfacs/encoder.py",
+      "source_path": "rl4co/models/zoo/gfacs/encoder.py",
+      "size_bytes": 2374,
+      "sha256": "bd4eefad29cc5c2fc478209b3066cac8fae80f1051acf8c8ed89582dc6ad2de1"
+    },
+    {
+      "path": "rl4co/models/zoo/gfacs/model.py",
+      "source_path": "rl4co/models/zoo/gfacs/model.py",
+      "size_bytes": 6026,
+      "sha256": "533cc8a8773fc9f63cbe05527d3280874fef0f7f8051498537d36c19fa8f6b78"
+    },
+    {
+      "path": "rl4co/models/zoo/gfacs/policy.py",
+      "source_path": "rl4co/models/zoo/gfacs/policy.py",
+      "size_bytes": 9613,
+      "sha256": "d28b6b05cc4e814639172c1855fb8a5adcda5af2f3bcfa333244e1ba0c0b7d2e"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/__init__.py",
+      "source_path": "rl4co/models/zoo/glop/__init__.py",
+      "size_bytes": 97,
+      "sha256": "6be9bdf09165747fd972861bd2c77a0524627cc8b14b2b1f55a2754e9b411b7e"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/adapter/__init__.py",
+      "source_path": "rl4co/models/zoo/glop/adapter/__init__.py",
+      "size_bytes": 378,
+      "sha256": "33ddcd6c3579c384ee529d3cb20396c790a91275dfd380867f6266d2341ab2a4"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/adapter/tsp_adapter.py",
+      "source_path": "rl4co/models/zoo/glop/adapter/tsp_adapter.py",
+      "size_bytes": 4080,
+      "sha256": "dbf40958b6d50bb6a5a7cece4425fcefc411a862357bcd481a728fe8ae7328ef"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/adapter/vrp_adapter.py",
+      "source_path": "rl4co/models/zoo/glop/adapter/vrp_adapter.py",
+      "size_bytes": 5989,
+      "sha256": "41b8162a0b606b164652a48713ee0583f4667c5aedb3e052e6aba201c1b971d0"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/model.py",
+      "source_path": "rl4co/models/zoo/glop/model.py",
+      "size_bytes": 2521,
+      "sha256": "6dfa0d232d7b8f51164be80fe9cb9b8f366a874f9d0cc4445d7219bd272e9a0b"
+    },
+    {
+      "path": "rl4co/models/zoo/glop/policy.py",
+      "source_path": "rl4co/models/zoo/glop/policy.py",
+      "size_bytes": 10566,
+      "sha256": "b5a25eeee0554f477a9e8be1a70662de04c9993413dd8c185b12d4caf19d4805"
+    },
+    {
+      "path": "rl4co/models/zoo/ham/__init__.py",
+      "source_path": "rl4co/models/zoo/ham/__init__.py",
+      "size_bytes": 101,
+      "sha256": "decf68a91a13cc6d3752228441147087a94a98d8abfd2da682038801cdde8853"
+    },
+    {
+      "path": "rl4co/models/zoo/ham/attention.py",
+      "source_path": "rl4co/models/zoo/ham/attention.py",
+      "size_bytes": 18929,
+      "sha256": "697f8baea33455d20797eca04a1a5785d6352c79e3c9178d85a9cc42ede22a39"
+    },
+    {
+      "path": "rl4co/models/zoo/ham/encoder.py",
+      "source_path": "rl4co/models/zoo/ham/encoder.py",
+      "size_bytes": 2302,
+      "sha256": "7b4499d8fb6d484de5274e7605f99f4bd05af7e7883705583eef4efedaabaa1d"
+    },
+    {
+      "path": "rl4co/models/zoo/ham/model.py",
+      "source_path": "rl4co/models/zoo/ham/model.py",
+      "size_bytes": 1394,
+      "sha256": "72b225d3b3bd98187951db07491b91f090d8c4b675192993d5ec8a296ebc6fce"
+    },
+    {
+      "path": "rl4co/models/zoo/ham/policy.py",
+      "source_path": "rl4co/models/zoo/ham/policy.py",
+      "size_bytes": 2426,
+      "sha256": "f859546b5a43f44f4ecef66aab361cf6c7eac2d50af4e71c551111321c0136a1"
+    },
+    {
+      "path": "rl4co/models/zoo/l2d/__init__.py",
+      "source_path": "rl4co/models/zoo/l2d/__init__.py",
+      "size_bytes": 101,
+      "sha256": "1b7a8c90e2f3ba583558bc19af9e2c4a66331561fb1c5392ff9f33c68d017b7c"
+    },
+    {
+      "path": "rl4co/models/zoo/l2d/decoder.py",
+      "source_path": "rl4co/models/zoo/l2d/decoder.py",
+      "size_bytes": 13322,
+      "sha256": "6b1c45637e342aba09771aeb1194d957e6143c78b66077f72c518ebea7f4c881"
+    },
+    {
+      "path": "rl4co/models/zoo/l2d/encoder.py",
+      "source_path": "rl4co/models/zoo/l2d/encoder.py",
+      "size_bytes": 768,
+      "sha256": "df279d6e7d602d193c6fa5099bffc1b331f106ef3b461745377b95cb155eb2ce"
+    },
+    {
+      "path": "rl4co/models/zoo/l2d/model.py",
+      "source_path": "rl4co/models/zoo/l2d/model.py",
+      "size_bytes": 2328,
+      "sha256": "fd0f7701e6f29c8328e26ebcd632a1a827192eb84bf7a5d9cc31a5015eb43c4d"
+    },
+    {
+      "path": "rl4co/models/zoo/l2d/policy.py",
+      "source_path": "rl4co/models/zoo/l2d/policy.py",
+      "size_bytes": 8870,
+      "sha256": "26cebf093abef50260f80a099667123f9bc64ae3d9d0cf625cef728d0b39b50c"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/__init__.py",
+      "source_path": "rl4co/models/zoo/matnet/__init__.py",
+      "size_bytes": 59,
+      "sha256": "877145fca48482b7fcbee030f6c5913309b4c97723e162a167ab9b363e956324"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/decoder.py",
+      "source_path": "rl4co/models/zoo/matnet/decoder.py",
+      "size_bytes": 4683,
+      "sha256": "16d3dbcb6c5593209b1685bfecb4229c2ab4af49de0db6703dcf05a184a0c0b3"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/encoder.py",
+      "source_path": "rl4co/models/zoo/matnet/encoder.py",
+      "size_bytes": 7395,
+      "sha256": "d31d33c6b01046854ddedd0e212b255f5eda0b2cb42128bd5ace45e756c29e27"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/matnet_w_sa.py",
+      "source_path": "rl4co/models/zoo/matnet/matnet_w_sa.py",
+      "size_bytes": 7272,
+      "sha256": "45a56939fed89a8f8b1594914e4caaf58c8723ef4e952752ff286d89e038bfdd"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/model.py",
+      "source_path": "rl4co/models/zoo/matnet/model.py",
+      "size_bytes": 1660,
+      "sha256": "60cedca585122622948320d0d24af5840c69c0c5bc510996e787b6c3dc7e5c30"
+    },
+    {
+      "path": "rl4co/models/zoo/matnet/policy.py",
+      "source_path": "rl4co/models/zoo/matnet/policy.py",
+      "size_bytes": 7021,
+      "sha256": "5724a06ab1b61f390be22ff009df79e61ed2a71a9a7389e9717db19e6502ca08"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/__init__.py",
+      "source_path": "rl4co/models/zoo/mdam/__init__.py",
+      "size_bytes": 55,
+      "sha256": "0200c3e9c9b272819fbdedd4a5442f4458b9dcb605d35896f74e01b52e2b8d7a"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/decoder.py",
+      "source_path": "rl4co/models/zoo/mdam/decoder.py",
+      "size_bytes": 12391,
+      "sha256": "63cef39883df441c283401ac63c14fc7a66166d4d4016b6df26a68e32014daa3"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/encoder.py",
+      "source_path": "rl4co/models/zoo/mdam/encoder.py",
+      "size_bytes": 3155,
+      "sha256": "5de328bbbe16d6c9cbe663a9ddaa180a52439326fe7bed7bc98d25cb2a4fc70e"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/mha.py",
+      "source_path": "rl4co/models/zoo/mdam/mha.py",
+      "size_bytes": 3094,
+      "sha256": "f41f4c1e92b6e59780f74d412fc122088ab040b7729934d7e2bf463f46da9841"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/model.py",
+      "source_path": "rl4co/models/zoo/mdam/model.py",
+      "size_bytes": 4701,
+      "sha256": "2e7e2c0106485cdbc76ad0b19a3a58b94393dbd057cc9e8f491409aa4f9f21cd"
+    },
+    {
+      "path": "rl4co/models/zoo/mdam/policy.py",
+      "source_path": "rl4co/models/zoo/mdam/policy.py",
+      "size_bytes": 2765,
+      "sha256": "efe970ea4626b70a67b644ae0ae7cf63485c5fa26824fbc4b61fccd53b61582e"
+    },
+    {
+      "path": "rl4co/models/zoo/mvmoe/__init__.py",
+      "source_path": "rl4co/models/zoo/mvmoe/__init__.py",
+      "size_bytes": 40,
+      "sha256": "f895fd752376c994712f443c7213ca16db7e9e9e7ee7061a62feb41c45dd2a1a"
+    },
+    {
+      "path": "rl4co/models/zoo/mvmoe/model.py",
+      "source_path": "rl4co/models/zoo/mvmoe/model.py",
+      "size_bytes": 3461,
+      "sha256": "e586c4655c6cd79368bf00cbc49b6d531a02d2c9c4ce3308a1b43a656256732d"
+    },
+    {
+      "path": "rl4co/models/zoo/n2s/__init__.py",
+      "source_path": "rl4co/models/zoo/n2s/__init__.py",
+      "size_bytes": 53,
+      "sha256": "2c8dbb9884fa73a6bfe63cde416d6de4fa8c2881b839a52057bc912c886475fe"
+    },
+    {
+      "path": "rl4co/models/zoo/n2s/decoder.py",
+      "source_path": "rl4co/models/zoo/n2s/decoder.py",
+      "size_bytes": 8639,
+      "sha256": "1b4a540dc18d1741dc95c892c0d6f08719d0c096939931fd55107a20b208277e"
+    },
+    {
+      "path": "rl4co/models/zoo/n2s/encoder.py",
+      "source_path": "rl4co/models/zoo/n2s/encoder.py",
+      "size_bytes": 7288,
+      "sha256": "56e2a47dda59ce738120bf1a288f086ca9fe9492dd9f543f7482756bb63c3515"
+    },
+    {
+      "path": "rl4co/models/zoo/n2s/model.py",
+      "source_path": "rl4co/models/zoo/n2s/model.py",
+      "size_bytes": 2076,
+      "sha256": "3473a6beb4033d50be880919271e660145e80a8ebf22ded0f602aaa4647026e3"
+    },
+    {
+      "path": "rl4co/models/zoo/n2s/policy.py",
+      "source_path": "rl4co/models/zoo/n2s/policy.py",
+      "size_bytes": 8319,
+      "sha256": "5ad7695b9d46752e38672b819b04f3f3949f7099719032144f2a9a3c9e5f3400"
+    },
+    {
+      "path": "rl4co/models/zoo/nargnn/__init__.py",
+      "source_path": "rl4co/models/zoo/nargnn/__init__.py",
+      "size_bytes": 68,
+      "sha256": "0880357e46165cb0203b3b316ecb80e73d33b1b0cedc6d639f34a574829017a1"
+    },
+    {
+      "path": "rl4co/models/zoo/nargnn/encoder.py",
+      "source_path": "rl4co/models/zoo/nargnn/encoder.py",
+      "size_bytes": 8712,
+      "sha256": "3f4901c2bebd7c52cc377ba6a0c626d3238ccb5cf11d645122b29c4bf8095459"
+    },
+    {
+      "path": "rl4co/models/zoo/nargnn/policy.py",
+      "source_path": "rl4co/models/zoo/nargnn/policy.py",
+      "size_bytes": 4625,
+      "sha256": "430f42bb9430d28f71ba837344c0a42bf5370897996def01be49084a2a4bc29a"
+    },
+    {
+      "path": "rl4co/models/zoo/neuopt/__init__.py",
+      "source_path": "rl4co/models/zoo/neuopt/__init__.py",
+      "size_bytes": 59,
+      "sha256": "d35dd211031a985340771c36810c0291fb1ea94cb5176b3272bef84fc38dfe66"
+    },
+    {
+      "path": "rl4co/models/zoo/neuopt/decoder.py",
+      "source_path": "rl4co/models/zoo/neuopt/decoder.py",
+      "size_bytes": 2594,
+      "sha256": "409e7aea67daee85d1435d9c7c7be9c3c23d19f060e95eb41526a6aebaaeba55"
+    },
+    {
+      "path": "rl4co/models/zoo/neuopt/model.py",
+      "source_path": "rl4co/models/zoo/neuopt/model.py",
+      "size_bytes": 2117,
+      "sha256": "3703a1c8f11b53b8ca2b6fa6fcfbe6460cf6f809d19ce2bd807d99bdf0f1971e"
+    },
+    {
+      "path": "rl4co/models/zoo/neuopt/policy.py",
+      "source_path": "rl4co/models/zoo/neuopt/policy.py",
+      "size_bytes": 11751,
+      "sha256": "93c43348eafca60dc709e5ebcf85d6d2a62fc87f178b82a5e24ac2c98c4bfb81"
+    },
+    {
+      "path": "rl4co/models/zoo/polynet/__init__.py",
+      "source_path": "rl4co/models/zoo/polynet/__init__.py",
+      "size_bytes": 27,
+      "sha256": "2837314863df03aff12775e1a2c9528aa3975eeb3283d8d66d9856bb83dd6a41"
+    },
+    {
+      "path": "rl4co/models/zoo/polynet/decoder.py",
+      "source_path": "rl4co/models/zoo/polynet/decoder.py",
+      "size_bytes": 5199,
+      "sha256": "a6c17395b44f623dcf34ae6dad2372694ae0d5316d949e0b43e990a4cdecf9a7"
+    },
+    {
+      "path": "rl4co/models/zoo/polynet/model.py",
+      "source_path": "rl4co/models/zoo/polynet/model.py",
+      "size_bytes": 9063,
+      "sha256": "af976175a5830fd2eac5f52036887c19716faf06961cc6a24ec0e085a2ec36f4"
+    },
+    {
+      "path": "rl4co/models/zoo/polynet/policy.py",
+      "source_path": "rl4co/models/zoo/polynet/policy.py",
+      "size_bytes": 3922,
+      "sha256": "581e4f488368af03b7e32378308786ea0e35c4ee755cfee5fea3d8b112591954"
+    },
+    {
+      "path": "rl4co/models/zoo/pomo/__init__.py",
+      "source_path": "rl4co/models/zoo/pomo/__init__.py",
+      "size_bytes": 24,
+      "sha256": "1df574aedd65b24e85f0f5ac34285049fc834af8d43cd46f886509df54552feb"
+    },
+    {
+      "path": "rl4co/models/zoo/pomo/model.py",
+      "source_path": "rl4co/models/zoo/pomo/model.py",
+      "size_bytes": 5985,
+      "sha256": "ef5f4cc3176922aa02ab3fe8e797df5af501e7d9e5995c151f923629e3e9de88"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/__init__.py",
+      "source_path": "rl4co/models/zoo/ptrnet/__init__.py",
+      "size_bytes": 75,
+      "sha256": "ce6a61b2d1db6743146b31c1f836d34a7bb1c80eea4f8af849538ade165611f0"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/critic.py",
+      "source_path": "rl4co/models/zoo/ptrnet/critic.py",
+      "size_bytes": 1738,
+      "sha256": "fd83b205120be0a2cd7c45d047aebfb18e9530d1457f1c3e6f738dda71264600"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/decoder.py",
+      "source_path": "rl4co/models/zoo/ptrnet/decoder.py",
+      "size_bytes": 6246,
+      "sha256": "6d1f79567c343417fd7d128802d50f626b140ed58898f0c1b070ddc47ccbed4f"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/encoder.py",
+      "source_path": "rl4co/models/zoo/ptrnet/encoder.py",
+      "size_bytes": 885,
+      "sha256": "a077316826168a1ac643451db449fa37bf753afe85f1b0d5df95b5c38d7b9cd3"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/model.py",
+      "source_path": "rl4co/models/zoo/ptrnet/model.py",
+      "size_bytes": 1307,
+      "sha256": "8b254e532f7b5132b1ea35a64f8a0e118fd55d8b84abff0219b2000869669d74"
+    },
+    {
+      "path": "rl4co/models/zoo/ptrnet/policy.py",
+      "source_path": "rl4co/models/zoo/ptrnet/policy.py",
+      "size_bytes": 3581,
+      "sha256": "3e7f73d1306a837922996e24aa909a1a43a4994e4b70cd6744746a81f6f89fb3"
+    },
+    {
+      "path": "rl4co/models/zoo/symnco/__init__.py",
+      "source_path": "rl4co/models/zoo/symnco/__init__.py",
+      "size_bytes": 59,
+      "sha256": "0a1d6c5b8d36d03bb033ef130469d63f3c83f0fa45dd949f2bf9fe6beff46bce"
+    },
+    {
+      "path": "rl4co/models/zoo/symnco/losses.py",
+      "source_path": "rl4co/models/zoo/symnco/losses.py",
+      "size_bytes": 1288,
+      "sha256": "47b5ee5fb624dbb5953998cf31162eb185200e9ab831b338d8df945e39be5bf1"
+    },
+    {
+      "path": "rl4co/models/zoo/symnco/model.py",
+      "source_path": "rl4co/models/zoo/symnco/model.py",
+      "size_bytes": 6221,
+      "sha256": "5cf1488e693a94db703dc9a608c04ca645665a6851fc2f47ba75a18405e67e21"
+    },
+    {
+      "path": "rl4co/models/zoo/symnco/policy.py",
+      "source_path": "rl4co/models/zoo/symnco/policy.py",
+      "size_bytes": 2914,
+      "sha256": "c66fa4426c491aba10a230de100571207e1771991a8415cab5793327efc7afdc"
+    },
+    {
+      "path": "rl4co/tasks/README.md",
+      "source_path": "rl4co/tasks/README.md",
+      "size_bytes": 4966,
+      "sha256": "e86125390e8a8fe7866d5c97e88e24bd4b230fea614c1f2ab50aa2193ea79228"
+    },
+    {
+      "path": "rl4co/tasks/__init__.py",
+      "source_path": "rl4co/tasks/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl4co/tasks/eval.py",
+      "source_path": "rl4co/tasks/eval.py",
+      "size_bytes": 18843,
+      "sha256": "fbf638ac567f5397525b5ce668dd2e36d182e79459560ba7b223309205505d8e"
+    },
+    {
+      "path": "rl4co/tasks/train.py",
+      "source_path": "rl4co/tasks/train.py",
+      "size_bytes": 4688,
+      "sha256": "b6a305ef1639b2a0c7aa48292990129fb437ef69587d358689a2a0c162de2fec"
+    },
+    {
+      "path": "rl4co/utils/__init__.py",
+      "source_path": "rl4co/utils/__init__.py",
+      "size_bytes": 369,
+      "sha256": "da86241325261968d973246ae30d8b538f2782a39647c7d78f3ffe51b2c5c403"
+    },
+    {
+      "path": "rl4co/utils/callbacks/speed_monitor.py",
+      "source_path": "rl4co/utils/callbacks/speed_monitor.py",
+      "size_bytes": 3817,
+      "sha256": "8523b43f632ab74fdde39f77fa0e67dafc8395cea5908ba569c3d0588025886a"
+    },
+    {
+      "path": "rl4co/utils/decoding.py",
+      "source_path": "rl4co/utils/decoding.py",
+      "size_bytes": 24305,
+      "sha256": "1aa6bc367483d170b8489fd13a20dbf3bc83b1ed45519e57db60adb41f6e48be"
+    },
+    {
+      "path": "rl4co/utils/instantiators.py",
+      "source_path": "rl4co/utils/instantiators.py",
+      "size_bytes": 1997,
+      "sha256": "a8752403f131e433cd51971a5b6e174914f4f04a0fb9ff8c96885e8aaa4d320d"
+    },
+    {
+      "path": "rl4co/utils/lightning.py",
+      "source_path": "rl4co/utils/lightning.py",
+      "size_bytes": 2336,
+      "sha256": "e9d23756356ccf96415dfb71d36a57f0d17fe43e46fa27b795ec427ec484690b"
+    },
+    {
+      "path": "rl4co/utils/meta_trainer.py",
+      "source_path": "rl4co/utils/meta_trainer.py",
+      "size_bytes": 8493,
+      "sha256": "126244fa257e516a66b0f11269bc453e0619ff4f724b67084d3862399eb91e25"
+    },
+    {
+      "path": "rl4co/utils/ops.py",
+      "source_path": "rl4co/utils/ops.py",
+      "size_bytes": 12404,
+      "sha256": "a99800b1b07226203ac4f4c14bb68744f4f587c5d5b8e442baa3e5daea932978"
+    },
+    {
+      "path": "rl4co/utils/optim_helpers.py",
+      "source_path": "rl4co/utils/optim_helpers.py",
+      "size_bytes": 1416,
+      "sha256": "1bcfcccc5c3c66e30a90c2da59cdaaa99e482212e2182bbec92c0a6c12e037f3"
+    },
+    {
+      "path": "rl4co/utils/pylogger.py",
+      "source_path": "rl4co/utils/pylogger.py",
+      "size_bytes": 681,
+      "sha256": "0e965244b171f9d14b80685471a5883b1196e39f084628fed38f33aafb09b8a0"
+    },
+    {
+      "path": "rl4co/utils/rich_utils.py",
+      "source_path": "rl4co/utils/rich_utils.py",
+      "size_bytes": 3089,
+      "sha256": "112626983535218a75888414aaf6aa0ec459b98823ea8299627e9eec87750309"
+    },
+    {
+      "path": "rl4co/utils/test_utils.py",
+      "source_path": "rl4co/utils/test_utils.py",
+      "size_bytes": 1816,
+      "sha256": "84c0e90d001cafe18671fe1cddba8c142390ae7df46098b9f5edefb1e704b768"
+    },
+    {
+      "path": "rl4co/utils/trainer.py",
+      "source_path": "rl4co/utils/trainer.py",
+      "size_bytes": 6844,
+      "sha256": "4485ec145e33cde5d2b1373bf643dfee7efebb5480b61174df9d4510f39efbcb"
+    },
+    {
+      "path": "rl4co/utils/utils.py",
+      "source_path": "rl4co/utils/utils.py",
+      "size_bytes": 9368,
+      "sha256": "e8585e644686f5d8d63f01fc2093cccc08c79454d88394449eeda80e8342acea"
+    },
+    {
+      "path": "run_am_infer.sh",
+      "source_path": "run_am_infer.sh",
+      "size_bytes": 3979,
+      "sha256": "4534fa1f82a877bfb211e7686f60ae4af5eae2e3117663b99c2f65ea5f522b86"
+    },
+    {
+      "path": "run_am_train.sh",
+      "source_path": "run_am_train.sh",
+      "size_bytes": 2906,
+      "sha256": "19e2f1b33e26d586f378b0899fe696c6b72b4830236a28fc9987c724959948b1"
+    },
+    {
+      "path": "run_compare_infer.sh",
+      "source_path": "run_compare_infer.sh",
+      "size_bytes": 2888,
+      "sha256": "7b4c92550a23d61b989b2d69986c6f5768c46b78dbce5e679452d04fa2b4ab4a"
+    },
+    {
+      "path": "run_mvmoe_train.sh",
+      "source_path": "run_mvmoe_train.sh",
+      "size_bytes": 3167,
+      "sha256": "f02df346fe65d5d2f79d939fc47114d18330291a27184c27098b80f31eac70d5"
+    },
+    {
+      "path": "run_paper_eval.sh",
+      "source_path": "run_paper_eval.sh",
+      "size_bytes": 11196,
+      "sha256": "654e15d8a4e7ec8968e5feac21f97039ecb1cc642ab04686f40329501f91f386"
+    },
+    {
+      "path": "run_polynet_infer.sh",
+      "source_path": "run_polynet_infer.sh",
+      "size_bytes": 3939,
+      "sha256": "57c92cef820638f35314c83c99f5034a5a9b1d152eb47599c582a7d248b6a000"
+    },
+    {
+      "path": "run_polynet_train.sh",
+      "source_path": "run_polynet_train.sh",
+      "size_bytes": 2966,
+      "sha256": "acd1cb0be261b548c9fecdd015ae3d0a3ad3e3b5b33c68d77e16b8611337bfb2"
+    },
+    {
+      "path": "scripts/aggregate_paper_stats.py",
+      "source_path": "scripts/aggregate_paper_stats.py",
+      "size_bytes": 19976,
+      "sha256": "ac17004d4d79f99e0a260d3655f47bab18ccf4f01a890e7e277dfb5f8d13166a"
+    },
+    {
+      "path": "scripts/run_dynamic_benchmark.py",
+      "source_path": "scripts/run_dynamic_benchmark.py",
+      "size_bytes": 17653,
+      "sha256": "435959625efd9eafb2096c3e9120c8687caab8dad39473b1863856c7cad06791"
+    },
+    {
+      "path": "utils/__init__.py",
+      "source_path": "utils/__init__.py",
+      "size_bytes": 678,
+      "sha256": "377613e583b6f0b8185859f15fc38ce589b382e50196288b89916ac9c72690c2"
+    },
+    {
+      "path": "utils/_args.py",
+      "source_path": "utils/_args.py",
+      "size_bytes": 16031,
+      "sha256": "10ca3dc73e3aed128d3b5b89768f07dba0e99523ebd4880cc8cd0f1dd4a5a0cd"
+    },
+    {
+      "path": "utils/_chkpt.py",
+      "source_path": "utils/_chkpt.py",
+      "size_bytes": 5505,
+      "sha256": "468a1cdd243a65c5635c92d2ab88a7b6e95ba98ba8c8b03a0442fec2f5109261"
+    },
+    {
+      "path": "utils/_misc.py",
+      "source_path": "utils/_misc.py",
+      "size_bytes": 6405,
+      "sha256": "bc8c706aafee529390171c6282f1c61cbeafa4baf0244006879fcca78afe9ab0"
+    },
+    {
+      "path": "utils/callbacks/speed_monitor.py",
+      "source_path": "utils/callbacks/speed_monitor.py",
+      "size_bytes": 3817,
+      "sha256": "8523b43f632ab74fdde39f77fa0e67dafc8395cea5908ba569c3d0588025886a"
+    },
+    {
+      "path": "utils/decoding.py",
+      "source_path": "utils/decoding.py",
+      "size_bytes": 24287,
+      "sha256": "8853d9b9415c2b29d9149cad131f48ae9a6d892a6c065b10d989310124723b3d"
+    },
+    {
+      "path": "utils/infer_utils.py",
+      "source_path": "utils/infer_utils.py",
+      "size_bytes": 35067,
+      "sha256": "62e0c9ab5d7636d74c592294e1e26edecf624686676a1f0a7182c672c8947494"
+    },
+    {
+      "path": "utils/instantiators.py",
+      "source_path": "utils/instantiators.py",
+      "size_bytes": 1991,
+      "sha256": "7ccdce82dbbbdfecfb0580319135d0aaa5d8bfb3d10e9f3700f4e0cf9ea6c9c3"
+    },
+    {
+      "path": "utils/learner_protocol.py",
+      "source_path": "utils/learner_protocol.py",
+      "size_bytes": 882,
+      "sha256": "d3ccd99f3f5244d8f0a04b0783c58527dac421adc4c6d0a6452e4bcf09d7e466"
+    },
+    {
+      "path": "utils/lightning.py",
+      "source_path": "utils/lightning.py",
+      "size_bytes": 2324,
+      "sha256": "5bf9e82dd9073dcc205c90cba7a92c55c0262a7c8243ab55b33fde01fb85290c"
+    },
+    {
+      "path": "utils/meta_trainer.py",
+      "source_path": "utils/meta_trainer.py",
+      "size_bytes": 8490,
+      "sha256": "1d97dedd4aa9c340570e6140c7632419d36cd056db9e7d50ab2feb22e1c31bc2"
+    },
+    {
+      "path": "utils/ops.py",
+      "source_path": "utils/ops.py",
+      "size_bytes": 12404,
+      "sha256": "a99800b1b07226203ac4f4c14bb68744f4f587c5d5b8e442baa3e5daea932978"
+    },
+    {
+      "path": "utils/optim_helpers.py",
+      "source_path": "utils/optim_helpers.py",
+      "size_bytes": 1416,
+      "sha256": "1bcfcccc5c3c66e30a90c2da59cdaaa99e482212e2182bbec92c0a6c12e037f3"
+    },
+    {
+      "path": "utils/pylogger.py",
+      "source_path": "utils/pylogger.py",
+      "size_bytes": 681,
+      "sha256": "0e965244b171f9d14b80685471a5883b1196e39f084628fed38f33aafb09b8a0"
+    },
+    {
+      "path": "utils/rich_utils.py",
+      "source_path": "utils/rich_utils.py",
+      "size_bytes": 3083,
+      "sha256": "0b9306fb0d6851397662a593d3965b001142184d6506d03d6e374571f0578e1d"
+    },
+    {
+      "path": "utils/test_utils.py",
+      "source_path": "utils/test_utils.py",
+      "size_bytes": 1810,
+      "sha256": "7c596de7f2d930c19e1759c5f7e15b493ded537b867aa1315adacf935295d020"
+    },
+    {
+      "path": "utils/trainer.py",
+      "source_path": "utils/trainer.py",
+      "size_bytes": 6834,
+      "sha256": "66a0a2958446d4238b487c6ad30c71a3e009cae5c2b93fe764999f4aa2a38db4"
+    },
+    {
+      "path": "utils/utils.py",
+      "source_path": "utils/utils.py",
+      "size_bytes": 9362,
+      "sha256": "4c69c04267b12b8167db93a91db668ed0ea39f10f3a1c9526a9b70f5f240efa3"
+    }
+  ],
+  "excluded_categories": [
+    ".git metadata",
+    "datasets",
+    "checkpoints/weights",
+    "generated outputs",
+    "caches",
+    "machine-specific .env (GP snapshot)"
+  ],
+  "source_worktree_dirty": true,
+  "included_source_paths_with_uncommitted_changes": [
+    "am/infer_single.py",
+    "am/train.py",
+    "infer_batch.py",
+    "polynet/infer_single.py",
+    "polynet/train.py",
+    "problems/_env_dtw.py",
+    "run_paper_eval.sh",
+    "scripts/run_dynamic_benchmark.py",
+    "utils/_args.py",
+    "utils/infer_utils.py"
+  ],
+  "manifest_self_hash": "omitted to avoid self-referential hashing"
+}

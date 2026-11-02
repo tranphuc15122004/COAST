@@ -1,0 +1,313 @@
+{
+  "snapshot_type": "allowlisted source snapshot from source working tree",
+  "source_repository": "GP-DVRPTW",
+  "source_commit": "a46e9e9446cc6dcf0e1ae71637641b2cffa21855",
+  "source_root_recorded_as": "GP-DVRPTW",
+  "license_file_found_in_source_tree": false,
+  "included_file_count": 42,
+  "included_files": [
+    {
+      "path": ".env.example",
+      "source_path": null,
+      "size_bytes": 338,
+      "sha256": "7dc5c542e406476e35a487b5073c33a6efd04bc625c8b23a63ad51358729a543"
+    },
+    {
+      "path": "Cargo.lock",
+      "source_path": "Cargo.lock",
+      "size_bytes": 14378,
+      "sha256": "dd5b6779780c9e9f16154b267e93d728b5461c59a7a74d0c845478cfbba8e83d"
+    },
+    {
+      "path": "Cargo.toml",
+      "source_path": "Cargo.toml",
+      "size_bytes": 447,
+      "sha256": "ad7d227ff6e89bcb77ad9d83fb23568c5fc045f2daacf86c6e6f9895cdee954e"
+    },
+    {
+      "path": "README.md",
+      "source_path": null,
+      "size_bytes": 1498,
+      "sha256": "4c8322fdff50f0d137ce5390fb9f44c53850b5dc8b3f60901183b83a0ee5293d"
+    },
+    {
+      "path": "UPSTREAM_README.md",
+      "source_path": "README.md",
+      "size_bytes": 810,
+      "sha256": "8b7ac12022635280f15293aadc19e4d311d256ff08282d0f7663bdcc3c99cf33"
+    },
+    {
+      "path": "problems/__init__.py",
+      "source_path": "problems/__init__.py",
+      "size_bytes": 374,
+      "sha256": "c28ef7d7d0c2f55c6bd16130310766e7b370618124111dbd716c1043d1ea0d0a"
+    },
+    {
+      "path": "problems/_data.py",
+      "source_path": "problems/_data.py",
+      "size_bytes": 3077,
+      "sha256": "c11c230744afac955d1372e0432fa486dbcecda6be2ee9cacdd7924e2548c4cf"
+    },
+    {
+      "path": "problems/_data_dtw.py",
+      "source_path": "problems/_data_dtw.py",
+      "size_bytes": 4348,
+      "sha256": "9c2fead684addb3c374d6c5bdb2a9ec58e365cefa288383fc763ef07e6e29012"
+    },
+    {
+      "path": "problems/_data_sdtw.py",
+      "source_path": "problems/_data_sdtw.py",
+      "size_bytes": 4315,
+      "sha256": "0ac716a7fb8426d3267136e3070f7bbb9f9e431b87c313db50df8058bc28cfc0"
+    },
+    {
+      "path": "problems/_data_tw.py",
+      "source_path": "problems/_data_tw.py",
+      "size_bytes": 3317,
+      "sha256": "2eece950e7e647e022cdb711a632d35c072c3e76c8628bb7192cd9eb1e781171"
+    },
+    {
+      "path": "problems/_env.py",
+      "source_path": "problems/_env.py",
+      "size_bytes": 4920,
+      "sha256": "88b26a7e78e973a89137bb03205f6bf8dfafa91618c30a6814b12ea879dddc49"
+    },
+    {
+      "path": "problems/_env_dtw.py",
+      "source_path": "problems/_env_dtw.py",
+      "size_bytes": 2098,
+      "sha256": "74188f473788a03bd7eca0770da26952572c2000b03c0e76054070e00dac0724"
+    },
+    {
+      "path": "problems/_env_sdtw.py",
+      "source_path": "problems/_env_sdtw.py",
+      "size_bytes": 1958,
+      "sha256": "bb20edfcdf910c7d90a55e203b620a632eeb647f9c67b3d002401b24c420dee4"
+    },
+    {
+      "path": "problems/_env_stw.py",
+      "source_path": "problems/_env_stw.py",
+      "size_bytes": 2584,
+      "sha256": "a24a998ae79d4cbbe7b781cf296d6a8af9e4546a792f58acaef4cd5392c08f36"
+    },
+    {
+      "path": "problems/_env_tw.py",
+      "source_path": "problems/_env_tw.py",
+      "size_bytes": 1606,
+      "sha256": "212f9aa67235bd3152ac8948372197c1125396981ef720e2424f8e43a7eb6b1f"
+    },
+    {
+      "path": "python_src/__init__.py",
+      "source_path": "python_src/__init__.py",
+      "size_bytes": 234,
+      "sha256": "b51cf182c08a4644cd9638ba50006318a40dcef69e3b2e56cf0b1ae68409fc98"
+    },
+    {
+      "path": "python_src/acs_km.py",
+      "source_path": "python_src/acs_km.py",
+      "size_bytes": 29269,
+      "sha256": "1115fb89ffed1eb995f7413484ad3f0159ad195a7a2d34ad6553a72d20c171f9"
+    },
+    {
+      "path": "python_src/gp/GPtree.py",
+      "source_path": "python_src/gp/GPtree.py",
+      "size_bytes": 9583,
+      "sha256": "b6a2c035148b33a731bc2dde1d9fbc4507068e50fce36a5212f78af346eb6ab7"
+    },
+    {
+      "path": "python_src/gp/__init__.py",
+      "source_path": "python_src/gp/__init__.py",
+      "size_bytes": 66,
+      "sha256": "1dc6c29ac244488866ccf0b0446fe58312a1fff374103d894e8e12bc47afb1a4"
+    },
+    {
+      "path": "python_src/gp/mod.py",
+      "source_path": "python_src/gp/mod.py",
+      "size_bytes": 6913,
+      "sha256": "613fb7e294312bb3fe9a3286f215b63605fbc28e9b25995eb94895408bf25ecf"
+    },
+    {
+      "path": "python_src/log/__init__.py",
+      "source_path": "python_src/log/__init__.py",
+      "size_bytes": 47,
+      "sha256": "d89d52cbe2cf45d531c959c0a0a7d1d9eb6c6eb528ef18d4e912791679e23314"
+    },
+    {
+      "path": "python_src/log/logger.py",
+      "source_path": "python_src/log/logger.py",
+      "size_bytes": 3246,
+      "sha256": "73d5ce2d3cba810902ef85df750c0902144201173a33cf8227c5b77e5056b40a"
+    },
+    {
+      "path": "python_src/main.py",
+      "source_path": "python_src/main.py",
+      "size_bytes": 16044,
+      "sha256": "dba10c2fdda1a7d8081facb33279177ea9a3db2427e90c348c6495686ba6164f"
+    },
+    {
+      "path": "python_src/sim/__init__.py",
+      "source_path": "python_src/sim/__init__.py",
+      "size_bytes": 88,
+      "sha256": "4eb5c9391b9b01d7237c51efc4560125fbd30c57d06d38529764d240f9560f06"
+    },
+    {
+      "path": "python_src/sim/ctx.py",
+      "source_path": "python_src/sim/ctx.py",
+      "size_bytes": 6533,
+      "sha256": "9f33b388ed47c06208ed43fa12783fe4735b9cff7270d0b5c92a1dcbe1af3786"
+    },
+    {
+      "path": "python_src/sim/mod.py",
+      "source_path": "python_src/sim/mod.py",
+      "size_bytes": 31119,
+      "sha256": "f8afea291f302a3434c2469a15fa42e358779db69cb4f3f2763226a53b4634e5"
+    },
+    {
+      "path": "python_src/sim/problem.py",
+      "source_path": "python_src/sim/problem.py",
+      "size_bytes": 9162,
+      "sha256": "b47ecb6aacdf481829ca60a0cce5ca1cf1d2ed9703963f65b79683cf14619c22"
+    },
+    {
+      "path": "python_src/tensor_main.py",
+      "source_path": "python_src/tensor_main.py",
+      "size_bytes": 12845,
+      "sha256": "cdbb46a22f72e88019aac0f667bdaff550e3c413d094facf92ffeb769fb7a8c5"
+    },
+    {
+      "path": "python_src/tools/decode_base64.py",
+      "source_path": "python_src/tools/decode_base64.py",
+      "size_bytes": 896,
+      "sha256": "896a9728ce637035ac6e82739b02892dd106faafda6d1d01a67d4af78234cfda"
+    },
+    {
+      "path": "script/export_combined_summary_csv.py",
+      "source_path": "script/export_combined_summary_csv.py",
+      "size_bytes": 11280,
+      "sha256": "aa07b7d6bd7ab62c0df67eaba37ef208f0addaf3513a146397435dc32380ade9"
+    },
+    {
+      "path": "script/run_multi_scenarios.py",
+      "source_path": "script/run_multi_scenarios.py",
+      "size_bytes": 17092,
+      "sha256": "af97688c424c260d00555f342c4eede1e7fbf9081a76ab23757721c697f81e66"
+    },
+    {
+      "path": "script/run_scenario_collect.py",
+      "source_path": "script/run_scenario_collect.py",
+      "size_bytes": 11133,
+      "sha256": "60815a8eab74ef7222558ddb29c31d2e4e3ecfff909cce01b44aa13d0f7d2878"
+    },
+    {
+      "path": "src/gp/mod.rs",
+      "source_path": "src/gp/mod.rs",
+      "size_bytes": 7705,
+      "sha256": "00c7f8a444e30e8c000fb9b21212aa8462c7694b1069f58c397e599f13c1fe0b"
+    },
+    {
+      "path": "src/gp/program.rs",
+      "source_path": "src/gp/program.rs",
+      "size_bytes": 8922,
+      "sha256": "34076555a2acb19457c45f91ca4294920a9231e0bc6b2256ad9861e805e2c333"
+    },
+    {
+      "path": "src/log/mod.rs",
+      "source_path": "src/log/mod.rs",
+      "size_bytes": 3335,
+      "sha256": "6bed29f48bb56e45e467385952c968bf77350e6538721f75a8ac0935c02e6381"
+    },
+    {
+      "path": "src/main.rs",
+      "source_path": "src/main.rs",
+      "size_bytes": 9458,
+      "sha256": "f0f45542ea92fb0b4ac4a3274c6cbe19ea2494650ec9f1b4fc4fab984199d464"
+    },
+    {
+      "path": "src/sim/ctx.rs",
+      "source_path": "src/sim/ctx.rs",
+      "size_bytes": 4941,
+      "sha256": "72c9c08e27bc8612eabc4494a3f207218e7608751e9d1ee3c4c20c7ef894631b"
+    },
+    {
+      "path": "src/sim/mod.rs",
+      "source_path": "src/sim/mod.rs",
+      "size_bytes": 11979,
+      "sha256": "3e2bbdc2f633a1ef267ff5ae8ca259d3c233c8ed5c556fd4ae956804da8f20e9"
+    },
+    {
+      "path": "src/sim/problem.rs",
+      "source_path": "src/sim/problem.rs",
+      "size_bytes": 2816,
+      "sha256": "1f3e8b56fe2a0909e3d37ce672474ae20cff39e1e74c684d9d7d659dd02e28de"
+    },
+    {
+      "path": "test/__init__.py",
+      "source_path": "test/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test/test_dataload.py",
+      "source_path": "test/test_dataload.py",
+      "size_bytes": 7354,
+      "sha256": "7b70d4073c51edaa741b96b27625709270f79a19ec079ed5b978b285b1d9f935"
+    },
+    {
+      "path": "test/test_problem_tensor_load.py",
+      "source_path": "test/test_problem_tensor_load.py",
+      "size_bytes": 1592,
+      "sha256": "9007be039dccee4454c8095a11e909dc37fb6a2355bc864b0da4a720d5709dee"
+    }
+  ],
+  "excluded_categories": [
+    ".git metadata",
+    "datasets",
+    "checkpoints/weights",
+    "generated outputs",
+    "caches",
+    "machine-specific .env (GP snapshot)"
+  ],
+  "source_worktree_dirty": true,
+  "included_source_paths_with_uncommitted_changes": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "README.md",
+    "problems/__init__.py",
+    "problems/_data.py",
+    "problems/_data_dtw.py",
+    "problems/_data_sdtw.py",
+    "problems/_data_tw.py",
+    "problems/_env.py",
+    "problems/_env_dtw.py",
+    "problems/_env_sdtw.py",
+    "problems/_env_stw.py",
+    "problems/_env_tw.py",
+    "python_src/__init__.py",
+    "python_src/acs_km.py",
+    "python_src/gp/GPtree.py",
+    "python_src/gp/__init__.py",
+    "python_src/gp/mod.py",
+    "python_src/log/__init__.py",
+    "python_src/log/logger.py",
+    "python_src/main.py",
+    "python_src/sim/__init__.py",
+    "python_src/sim/ctx.py",
+    "python_src/sim/mod.py",
+    "python_src/sim/problem.py",
+    "python_src/tensor_main.py",
+    "python_src/tools/decode_base64.py",
+    "script/export_combined_summary_csv.py",
+    "script/run_multi_scenarios.py",
+    "script/run_scenario_collect.py",
+    "src/gp/mod.rs",
+    "src/gp/program.rs",
+    "src/log/mod.rs",
+    "src/main.rs",
+    "src/sim/ctx.rs",
+    "src/sim/mod.rs",
+    "src/sim/problem.rs",
+    "test/test_dataload.py",
+    "test/test_problem_tensor_load.py"
+  ],
+  "manifest_self_hash": "omitted to avoid self-referential hashing"
+}

@@ -1,5 +1,14 @@
 import torch
 import os.path
+from pathlib import Path
+
+
+def checkpoint_args_json_path(model_weight):
+    """Return the sibling training config path for a checkpoint, if present."""
+    if not model_weight:
+        return None
+    candidate = Path(model_weight).expanduser().resolve().parent / "args.json"
+    return candidate if candidate.is_file() else None
 
 def save_checkpoint(args, ep, learner, optim, baseline = None, lr_sched = None):
     checkpoint = {

@@ -41,6 +41,9 @@ class GraphEncoderLayer(nn.Module):
 		return torch.exp(-((d - centers) ** 2) / (2 * width ** 2))
 
 	def forward(self, h_in, cost_mat, mask = None):
+		if mask is not None:
+			mask = mask.to(dtype=torch.bool)
+
 		batch, length, _ = h_in.size()
 		head_dim = self.model_size // self.head_count
 

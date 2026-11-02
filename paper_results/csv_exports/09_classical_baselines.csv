@@ -3,4 +3,4 @@ OR-Tools (ID n50m3),Classical,1024.7200,,"Raw cost, 500 instances, static solver
 Greedy NN,Classical,58.6900,6.5400,"Normalized, 500 instances"
 AM,Literature,49.2200,4.6900,"layer=5,head=8, 500 instances"
 PolyNet,Literature,49.1800,4.9700,"layer=5,head=8, 500 instances"
-MARDAM,Literature,45.0200,1.6200,"layer=3,head=8, dynamic benchmark"
+MARDAM,Literature,44.7624,3.7801,"layer=3,head=8, 500 instances"

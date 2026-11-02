@@ -20,6 +20,9 @@ class TransformerEncoderLayer(nn.Module):
         :param mask:    :math:`N \times L`
         :return:        :math:`N \times L \times D_M`
         """
+        if mask is not None:
+            mask = mask.to(dtype=torch.bool)
+
         att = self.mha(h_in, mask = mask)
         att = self.bn1( (h_in + att).permute(0,2,1) ).permute(0,2,1)
 

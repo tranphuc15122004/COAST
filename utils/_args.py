@@ -257,6 +257,10 @@ def parse_args(argv = None):
     group = parser.add_argument_group("Data generation parameters")
     group.add_argument("--problem-type", "-p", type = str,
             choices = ["vrp", "vrptw", "svrptw", "sdvrptw" , "dvrptw"], default = PROBLEM)
+    group.add_argument("--train-data-file", type = str, default = None,
+            help = "Load a shared raw training pool instead of generating one")
+    group.add_argument("--test-data-file", type = str, default = None,
+            help = "Load a shared raw validation/test pool instead of generating one")
     group.add_argument("--customers-count", "-n", type = int, default = CUST_COUNT)
     group.add_argument("--vehicles-count", "-m", type = int, default = VEH_COUNT)
     group.add_argument("--veh-capa", type = int, default = VEH_CAPA)
@@ -330,6 +334,8 @@ def parse_args(argv = None):
     group.add_argument("--amp", action = "store_true", default = AMP)
     group.add_argument("--num-workers", type = int, default = NUM_WORKERS)
     group.add_argument("--pin-memory", action = "store_true", default = PIN_MEMORY)
+    group.add_argument("--strict-run-budget", action = "store_true", default = False,
+            help = "Fail on OOM instead of changing the configured batch or validation result")
 
     group = parser.add_argument_group("Baselines parameters")
     group.add_argument("--baseline-type", type = str,

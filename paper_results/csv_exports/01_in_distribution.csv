@@ -7,7 +7,7 @@ B1 (memory),Ablation,45.2800,4.1400,8442,4554,2.86
 B3 (lookahead),Ablation,44.8400,4.0800,8400,4669,1.86
 B5 (linear),Ablation,45.4700,4.0700,8614,4340,3.29
 EdgeOff,Ablation,45.8800,4.0700,8380,5455,4.23
-MARDAM,Literature,45.0200,1.6200,,,2.27
+MARDAM,Literature,44.7624,3.7801,8404,5406,1.69
 AM,Literature,49.2200,4.6900,8385,7623,11.81
 PolyNet,Literature,49.1800,4.9700,8509,6878,11.72
 Greedy NN,Classical,58.6900,6.5400,,,33.33

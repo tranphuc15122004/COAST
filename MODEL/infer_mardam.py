@@ -24,6 +24,7 @@ from problems import (
     VRPTW_Environment,
 )
 from utils import actions_to_routes, eval_apriori_routes, parse_args, routes_to_string, set_random_seed
+from utils._chkpt import checkpoint_args_json_path
 
 
 def parse_infer_args(argv = None):
@@ -96,6 +97,11 @@ def parse_infer_args(argv = None):
 
     infer_args, remain = infer_parser.parse_known_args(argv)
     args = parse_args(remain)
+    if args.config_file is None:
+        config_path = checkpoint_args_json_path(args.model_weight)
+        if config_path is not None:
+            print("[infer] Reconstructing model config from '{}'".format(config_path))
+            args = parse_args(["--config-file", str(config_path), *remain])
 
     args.data_csv = infer_args.data_csv
     args.data_file = infer_args.data_file
@@ -552,7 +558,10 @@ def main(args):
     learner.eval()
 
     with torch.no_grad():
-        warmup_env = env_cls(data, data.nodes[:1].to(device), None, *env_params)
+        w_mask = data.cust_mask[:1].to(device) if data.cust_mask is not None else None
+        warmup_env = env_cls(data, data.nodes[:1].to(device), w_mask, *env_params)
+        if warmup_env.init_cust_mask is not None:
+            warmup_env.init_cust_mask = warmup_env.init_cust_mask.to(device)
         _ = learner(warmup_env)
 
     _load_model_weights_or_raise(args.model_weight, learner)

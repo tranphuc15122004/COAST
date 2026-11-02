@@ -1,0 +1,10 @@
+{
+  "methods": ["coast", "mardam", "am", "polynet"],
+  "seeds": [42, 123, 456, 789, 1024],
+  "python": null,
+  "gpu_ids": ["0"],
+  "expected_gpu_name": "B200",
+  "parallel_per_gpu": 1,
+  "job_gpu_map": {},
+  "output_root": "output/multiseed_g1_b200"
+}
