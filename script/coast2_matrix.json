@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "study": "COAST2 post-decision lookahead",
+  "protocol": "full",
+  "seeds": [42, 123, 456],
+  "shared_data": {
+    "directory": "data/coast_ablation",
+    "train_instances_per_seed": 512000,
+    "validation_instances": 10240,
+    "primary_test_instances": 1000,
+    "same_train_and_validation_pools_across_variants": true,
+    "primary_test_used_for_checkpoint_selection": false
+  },
+  "recipe": {
+    "epochs": 500,
+    "updates_per_epoch": 1000,
+    "batch_size": 512,
+    "validation_chunk_size": 512,
+    "customers": 50,
+    "vehicles": 3,
+    "model_size": 128,
+    "encoder_layers": 2,
+    "attention_heads": 4,
+    "feed_forward_size": 256,
+    "dropout": 0.1,
+    "learner_learning_rate": 0.0001,
+    "critic_learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "gradient_clip_norm": 2.0,
+    "advantage_normalization": true,
+    "entropy_coefficient": 0.01,
+    "amp": true
+  },
+  "variants": [
+    {"id": "f11", "label": "C + O (L0)", "entrypoint": "script/train_coast_ablation.py"},
+    {"id": "f10", "label": "C", "entrypoint": "script/train_coast_ablation.py"},
+    {"id": "f01", "label": "C without edge compatibility + O", "entrypoint": "script/train_coast_ablation.py"},
+    {"id": "cm", "label": "C + generic memory scorer", "entrypoint": "script/train_coast_ablation.py"},
+    {"id": "coast2", "label": "C + O + post-decision Lookahead (L2)", "entrypoint": "script/train_coast2.py"}
+  ],
+  "primary_contrast": "COAST2 vs f11, paired by seed and shared validation/test instances",
+  "full_runs": 15
+}

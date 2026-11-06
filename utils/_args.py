@@ -78,6 +78,7 @@ ADV_NORM = True
 ENTROPY_COEF = 0.01
 
 TEST_BATCH_SIZE = 128
+VALIDATION_BATCH_SIZE = 512
 
 PPO_EPOCHS = 4
 PPO_CLIP_RANGE = 0.2
@@ -352,6 +353,8 @@ def parse_args(argv = None):
 
     group = parser.add_argument_group("Testing parameters")
     group.add_argument("--test-batch-size", type = int, default = TEST_BATCH_SIZE)
+    group.add_argument("--validation-batch-size", type = int, default = VALIDATION_BATCH_SIZE,
+            help = "Chunk size for validation inference; does not change the validation pool")
 
     group = parser.add_argument_group("PPO parameters")
     group.add_argument("--ppo-epochs", type = int, default = PPO_EPOCHS)

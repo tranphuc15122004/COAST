@@ -20,7 +20,9 @@ from problems import *
 import time
 import os
 import math
+import json
 from itertools import chain
+import copy
 
 
 def _is_cuda_device_assert_error(exc: Exception) -> bool:
@@ -97,7 +99,25 @@ def _compute_train_batch_stats(args, data, Environment, env_params, bl_wrapped_l
     return loss, prob, val, bl, _detach_loss_components(loss_components)
 
 
-def save_best_val_checkpoint(args, ep, learner, optim, baseline = None, lr_sched = None, best_val_mu = None):
+def _make_training_loader(data, args, epoch):
+    generator = None
+    if getattr(args, "study_variant", None) is not None:
+        if args.rng_seed is None:
+            raise ValueError("Study runs require a fixed rng_seed for paired data ordering")
+        generator = torch.Generator(device="cpu")
+        generator.manual_seed((int(args.rng_seed) + 1_000_003 * int(epoch)) % (2**63 - 1))
+    return DataLoader(
+        data,
+        args.batch_size,
+        True,
+        num_workers=args.num_workers,
+        pin_memory=args.pin_memory,
+        persistent_workers=args.num_workers > 0,
+        generator=generator,
+    )
+
+
+def save_best_val_checkpoint(args, ep, learner, optim, baseline = None, lr_sched = None, best_val_mu = None, training_state = None):
     checkpoint = {
             "ep": ep,
             "best_ep": ep,
@@ -105,22 +125,19 @@ def save_best_val_checkpoint(args, ep, learner, optim, baseline = None, lr_sched
             "model": learner.state_dict(),
             "optim": optim.state_dict()
             }
+    if getattr(args, "study_variant", None) is not None:
+        checkpoint["study_variant"] = args.study_variant
+    if training_state is not None:
+        checkpoint["training_state"] = training_state
     if args.rate_decay is not None:
         checkpoint["lr_sched"] = lr_sched.state_dict()
     if args.baseline_type == "critic":
         checkpoint["critic"] = baseline.state_dict()
-    torch.save(checkpoint, os.path.join(args.output_dir, "chkpt_best.pyth"))
+    atomic_torch_save(checkpoint, os.path.join(args.output_dir, "chkpt_best.pyth"))
 
 def train_epoch(args, data, Environment : VRP_Environment, env_params, bl_wrapped_learner : Baseline, optim : Adam, device, ep, scaler: GradScaler):
     bl_wrapped_learner.learner.train()
-    loader = DataLoader(
-        data,
-        args.batch_size,
-        True,
-        num_workers = args.num_workers,
-        pin_memory = args.pin_memory,
-        persistent_workers = args.num_workers > 0,
-    )
+    loader = _make_training_loader(data, args, ep)
 
     ep_loss = 0
     ep_prob = 0
@@ -312,6 +329,22 @@ def train_epoch(args, data, Environment : VRP_Environment, env_params, bl_wrappe
             amp_fallbacks,
         ))
 
+    update_counts = {
+        "epoch": int(ep + 1),
+        "scheduled_updates": int(len(loader)),
+        "successful_updates": int(processed_batches),
+        "skipped_updates": int(skipped_nonfinite),
+        "amp_fallbacks": int(amp_fallbacks),
+    }
+    args.last_train_epoch_update_counts = update_counts
+    if getattr(args, "study_variant", None) is not None:
+        if processed_batches != int(args.iter_count) or skipped_nonfinite != 0:
+            raise RuntimeError(
+                "Study protocol requires {} successful updates and zero skipped updates; got {} successful / {} skipped".format(
+                    args.iter_count, processed_batches, skipped_nonfinite
+                )
+            )
+
     if processed_batches == 0:
         print("[error] epoch {} had no successful optimizer steps; returning NaN train metrics instead of misleading zeros.".format(ep + 1))
         return (float("nan"),) * 8
@@ -326,6 +359,17 @@ def train_epoch(args, data, Environment : VRP_Environment, env_params, bl_wrappe
         ep_critic_loss,
         ep_entropy_loss,
     ))
+
+
+def _write_study_update_counts(args):
+    if getattr(args, "study_variant", None) is None:
+        return
+    record = getattr(args, "last_train_epoch_update_counts", None)
+    if record is None:
+        raise RuntimeError("Study epoch completed without update-count accounting")
+    path = os.path.join(args.output_dir, "update_counts.jsonl")
+    with open(path, "a", encoding="utf-8") as stream:
+        stream.write(json.dumps(record, sort_keys=True) + "\n")
 
 
 def test_epoch(args, test_env, learner, ref_costs):
@@ -355,15 +399,28 @@ def val_epoch(args, test_env, learner):
         learner.greedy = True
     try:
         with torch.no_grad():
-            if args.problem_type[0] == "s":
-                costs = test_env.nodes.new_zeros(test_env.minibatch_size)
-                for _ in range(100):
-                    _, _, rewards = learner(test_env)
-                    costs -= torch.stack(rewards).sum(0).squeeze(-1)
-                costs = costs / 100
-            else:
-                _, _, rs = learner(test_env)
-                costs = -torch.stack(rs).sum(dim = 0).squeeze(-1)
+            chunk_size = int(getattr(args, "validation_batch_size", test_env.minibatch_size))
+            if chunk_size <= 0:
+                raise ValueError("validation_batch_size must be positive")
+            costs = []
+            for start in range(0, test_env.minibatch_size, chunk_size):
+                stop = min(start + chunk_size, test_env.minibatch_size)
+                batch_env = copy.copy(test_env)
+                batch_env.nodes = test_env.nodes[start:stop]
+                batch_env.minibatch_size = stop - start
+                if test_env.init_cust_mask is not None:
+                    batch_env.init_cust_mask = test_env.init_cust_mask[start:stop]
+                if args.problem_type[0] == "s":
+                    batch_costs = batch_env.nodes.new_zeros(batch_env.minibatch_size)
+                    for _ in range(100):
+                        _, _, rewards = learner(batch_env)
+                        batch_costs -= torch.stack(rewards).sum(0).squeeze(-1)
+                    batch_costs = batch_costs / 100
+                else:
+                    _, _, rewards = learner(batch_env)
+                    batch_costs = -torch.stack(rewards).sum(dim=0).squeeze(-1)
+                costs.append(batch_costs)
+            costs = torch.cat(costs, dim=0)
             mean = costs.mean()
             std = costs.std()
     finally:
@@ -573,10 +630,11 @@ def main(args):
     write_config_file(args, os.path.join(args.output_dir, "args.json"))
     verbose_print("'{}' created.".format(args.output_dir))
 
+    scaler = GradScaler(enabled = args.amp)
     if args.resume_state is None:
         start_ep = 0
     else:
-        start_ep = load_checkpoint(args, learner, optim, baseline, lr_sched)
+        start_ep = load_checkpoint(args, learner, optim, baseline, lr_sched, scaler = scaler)
         
     
     load_model_weights(args , learner )
@@ -602,8 +660,8 @@ def main(args):
         except Exception:
             pass
 
-    scaler = GradScaler(enabled = args.amp)  # wrapper above passes device_type automatically
     ep = start_ep - 1
+    interrupted = False
     try:
         for ep in range(start_ep, args.epoch_count):
             train_stats.append( train_epoch(args, train_data, Environment, env_params, baseline, optim, dev, ep, scaler) )
@@ -618,6 +676,7 @@ def main(args):
                 save_best_val_checkpoint(args, ep, learner, optim, baseline, lr_sched, best_val_mu)
                 verbose_print("[BEST] ep={} val_mu={:.6g} -> chkpt_best.pyth".format(ep + 1, best_val_mu))
             update_train_test_stats(args, ep, train_stats, val_stats)
+            _write_study_update_counts(args)
 
             if args.rate_decay is not None:
                 lr_sched.step()
@@ -629,13 +688,26 @@ def main(args):
                 args.max_grad_norm *= args.grad_norm_decay
 
             if (ep+1) % args.checkpoint_period == 0:
-                save_checkpoint(args, ep, learner, optim, baseline, lr_sched)
+                training_state = (
+                    capture_training_state(
+                        scaler,
+                        completed_epoch=ep + 1,
+                        global_step=(ep + 1) * args.iter_count,
+                    )
+                    if getattr(args, "study_variant", None) is not None else None
+                )
+                save_checkpoint(
+                    args, ep, learner, optim, baseline, lr_sched,
+                    training_state=training_state,
+                )
 
     except KeyboardInterrupt:
-        try:
-            save_checkpoint(args, ep, learner, optim, baseline, lr_sched)
-        except Exception as e:
-            print("[warn] Skip checkpoint after interrupt due to save error: {}".format(e))
+        interrupted = True
+        if getattr(args, "study_variant", None) is None:
+            try:
+                save_checkpoint(args, ep, learner, optim, baseline, lr_sched)
+            except Exception as e:
+                print("[warn] Skip checkpoint after interrupt due to save error: {}".format(e))
         export_train_test_stats(args, start_ep, train_stats, test_stats)
     except Exception as e:
         if _is_cuda_device_assert_error(e):
@@ -656,13 +728,15 @@ def main(args):
                     return
                 print("[warn] CUDA sync failed before final save: {}".format(e))
 
-        try:
-            save_checkpoint(args, ep, learner, optim, baseline, lr_sched)
-        except Exception as e:
-            if _is_cuda_device_assert_error(e):
-                print("[warn] Final checkpoint skipped due to CUDA device-side assert.")
-            else:
-                print("[warn] Final checkpoint save failed: {}".format(e))
+        if not (interrupted and getattr(args, "study_variant", None) is not None):
+            if getattr(args, "study_variant", None) is None:
+                try:
+                    save_checkpoint(args, ep, learner, optim, baseline, lr_sched)
+                except Exception as e:
+                    if _is_cuda_device_assert_error(e):
+                        print("[warn] Final checkpoint skipped due to CUDA device-side assert.")
+                    else:
+                        print("[warn] Final checkpoint save failed: {}".format(e))
         export_train_test_stats(args, start_ep, train_stats, test_stats)
         if best_ep >= 0:
             verbose_print("Best validation checkpoint: ep={} val_mu={:.6g}".format(best_ep + 1, best_val_mu))

@@ -1,6 +1,9 @@
 import torch
+import os
 import os.path
 from pathlib import Path
+import random
+import numpy as np
 
 
 def checkpoint_args_json_path(model_weight):
@@ -10,33 +13,119 @@ def checkpoint_args_json_path(model_weight):
     candidate = Path(model_weight).expanduser().resolve().parent / "args.json"
     return candidate if candidate.is_file() else None
 
-def save_checkpoint(args, ep, learner, optim, baseline = None, lr_sched = None):
+
+def atomic_torch_save(payload, path):
+    """Write a complete checkpoint before replacing the previous file."""
+    output_path = Path(path)
+    temporary_path = output_path.with_name(output_path.name + ".tmp")
+    try:
+        torch.save(payload, temporary_path)
+        os.replace(temporary_path, output_path)
+    except Exception:
+        try:
+            temporary_path.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+
+def capture_training_state(scaler=None, completed_epoch=None, global_step=None):
+    """Capture state needed to resume exactly at the next epoch boundary."""
+    return {
+        "epoch_complete": completed_epoch is not None,
+        "completed_epoch": None if completed_epoch is None else int(completed_epoch),
+        "global_step": None if global_step is None else int(global_step),
+        "python_rng": random.getstate(),
+        "numpy_rng": np.random.get_state(),
+        "torch_cpu_rng": torch.get_rng_state(),
+        "torch_cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_initialized() else None,
+        "scaler": None if scaler is None else scaler.state_dict(),
+    }
+
+
+def restore_training_state(state, scaler=None):
+    if not state or not state.get("epoch_complete", False):
+        raise ValueError("Study checkpoints can resume only from a completed epoch")
+    if state.get("completed_epoch") is None:
+        raise ValueError("Completed epoch checkpoint is missing its epoch index")
+    required = ("python_rng", "numpy_rng", "torch_cpu_rng", "scaler", "global_step")
+    missing = [key for key in required if key not in state or state[key] is None]
+    if missing:
+        raise ValueError("Training state is missing exact-resume fields: {}".format(", ".join(missing)))
+
+    random.setstate(state["python_rng"])
+    np.random.set_state(state["numpy_rng"])
+    torch.set_rng_state(state["torch_cpu_rng"])
+    cuda_rng = state.get("torch_cuda_rng")
+    if cuda_rng is not None:
+        if not torch.cuda.is_available():
+            raise RuntimeError("Checkpoint contains CUDA RNG state but CUDA is unavailable")
+        if len(cuda_rng) != torch.cuda.device_count():
+            raise RuntimeError("CUDA device count differs from the exact-resume checkpoint")
+        torch.cuda.set_rng_state_all(cuda_rng)
+    if scaler is not None:
+        scaler.load_state_dict(state["scaler"])
+    return int(state["completed_epoch"])
+
+
+def save_checkpoint(args, ep, learner, optim, baseline = None, lr_sched = None, training_state = None):
     checkpoint = {
             "ep": ep,
             "model": learner.state_dict(),
             "optim": optim.state_dict()
             }
+    if getattr(args, "study_variant", None) is not None:
+        checkpoint["study_variant"] = args.study_variant
+    if training_state is not None:
+        checkpoint["training_state"] = training_state
     if args.rate_decay is not None:
         checkpoint["lr_sched"] = lr_sched.state_dict()
     if args.baseline_type == "critic":
         checkpoint["critic"] = baseline.state_dict()
-    torch.save(checkpoint, os.path.join(args.output_dir, "chkpt_ep{}.pyth".format(ep+1)))
+    atomic_torch_save(checkpoint, os.path.join(args.output_dir, "chkpt_ep{}.pyth".format(ep+1)))
+    if getattr(args, "study_variant", None) is not None:
+        _prune_epoch_checkpoints(args.output_dir, getattr(args, "keep_checkpoints", KEEP_LAST))
+
+
+def _prune_epoch_checkpoints(output_dir, keep):
+    if keep is None:
+        return
+    keep = max(1, int(keep))
+
+    def epoch_number(name):
+        try:
+            return int(name[len("chkpt_ep"):-len(".pyth")])
+        except (TypeError, ValueError):
+            return -1
+
+    files = [
+        name for name in os.listdir(output_dir)
+        if name.startswith("chkpt_ep") and name.endswith(".pyth")
+    ]
+    for old in sorted(files, key=epoch_number, reverse=True)[keep:]:
+        try:
+            os.remove(os.path.join(output_dir, old))
+        except OSError:
+            pass
 
 KEEP_LAST = 5
 
-def save_checkpoint_in_train(args, ep, learner, optim, baseline = None, lr_sched = None):
+def save_checkpoint_in_train(args, ep, learner, optim, baseline = None, lr_sched = None, training_state = None):
     checkpoint = {
             "ep": ep,
             "model": learner.state_dict(),
             "optim": optim.state_dict()
             }
+    if getattr(args, "study_variant", None) is not None:
+        checkpoint["study_variant"] = args.study_variant
+    if training_state is not None:
+        checkpoint["training_state"] = training_state
     if args.rate_decay is not None:
         checkpoint["lr_sched"] = lr_sched.state_dict()
     if args.baseline_type == "critic":
         checkpoint["critic"] = baseline.state_dict()
     out_name = "chkpt_ep{}.pyth".format(ep+1)
     out_path = os.path.join(args.output_dir, out_name)
-    torch.save(checkpoint, out_path)
+    atomic_torch_save(checkpoint, out_path)
 
     # keep only the latest KEEP_LAST checkpoints (or args.keep_checkpoints if provided)
     try:
@@ -63,27 +152,41 @@ def save_checkpoint_in_train(args, ep, learner, optim, baseline = None, lr_sched
         # do not fail saving checkpoint because of cleanup errors
         pass
 
-def load_checkpoint(args, learner, optim, baseline = None, lr_sched = None):
+def load_checkpoint(args, learner, optim, baseline = None, lr_sched = None, scaler = None):
     checkpoint = torch.load(args.resume_state, map_location='cpu', weights_only=False)
 
-    # Try strict first; fall back to non-strict so checkpoints from nearby
-    # architecture variants can still be resumed safely.
-    try:
+    study_variant = getattr(args, "study_variant", None)
+    if study_variant is not None and checkpoint.get("study_variant") != study_variant:
+        raise ValueError("Resume checkpoint study variant does not match the requested variant")
+
+    if study_variant is not None:
         learner.load_state_dict(checkpoint["model"], strict=True)
-    except RuntimeError as e:
-        print(f"[load_checkpoint] strict load failed ({e}); retrying with strict=False")
-        result = learner.load_state_dict(checkpoint["model"], strict=False)
-        if result.missing_keys:
-            print(f"[load_checkpoint] Missing keys (will use random init): {result.missing_keys}")
-        if result.unexpected_keys:
-            print(f"[load_checkpoint] Unexpected keys (ignored): {result.unexpected_keys}")
+    else:
+        # Historical non-study runs retain their permissive checkpoint behavior.
+        try:
+            learner.load_state_dict(checkpoint["model"], strict=True)
+        except RuntimeError as e:
+            print(f"[load_checkpoint] strict load failed ({e}); retrying with strict=False")
+            result = learner.load_state_dict(checkpoint["model"], strict=False)
+            if result.missing_keys:
+                print(f"[load_checkpoint] Missing keys (will use random init): {result.missing_keys}")
+            if result.unexpected_keys:
+                print(f"[load_checkpoint] Unexpected keys (ignored): {result.unexpected_keys}")
 
     optim.load_state_dict(checkpoint["optim"])
     if args.rate_decay is not None and "lr_sched" in checkpoint:
         lr_sched.load_state_dict(checkpoint["lr_sched"])
     if args.baseline_type == "critic" and baseline is not None and "critic" in checkpoint:
         baseline.load_state_dict(checkpoint["critic"])
-    return checkpoint["ep"]
+    if study_variant is not None:
+        state = checkpoint.get("training_state")
+        completed_epoch = restore_training_state(state, scaler)
+        if completed_epoch != int(checkpoint["ep"]) + 1:
+            raise ValueError("Checkpoint epoch and captured training state disagree")
+        if int(state["global_step"]) != completed_epoch * int(args.iter_count):
+            raise ValueError("Checkpoint global step does not match the locked update schedule")
+        return completed_epoch
+    return int(checkpoint["ep"]) + 1
 
 import torch
 
