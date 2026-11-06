@@ -316,4 +316,56 @@ def test_coast2_selective_encoding_incompatible_activation_checkpointing():
         model._encode_customers(nodes, mask)
 
 
+def test_ablation_variants_support_selective_encoding():
+    from MODEL.model.ablation_study import build_ablation_model
+    for variant in ("f11", "f10", "f01", "cm"):
+        model = build_ablation_model(variant, 7, 4, model_size=16, layer_count=1, head_count=4, ff_size=32, memory_size=16)
+        model.selective_customer_encoding = True
+        model._reset_customer_encoding()
+        nodes = torch.rand(4, 6, 7)
+        mask = torch.zeros(4, 6, dtype=torch.bool)
+        model._encode_customers(nodes, mask)
+        assert model.cust_repr is not None
+
+        model_kwarg = build_ablation_model(
+            variant, 7, 4, model_size=16, layer_count=1, head_count=4, ff_size=32, memory_size=16,
+            selective_customer_encoding=True,
+        )
+        assert model_kwarg.selective_customer_encoding is True
+        model_kwarg._reset_customer_encoding()
+        model_kwarg._encode_customers(nodes, mask)
+        assert model_kwarg.cust_repr is not None
+
+
+def test_baseline_resets_customer_encoding():
+    from baselines._base import Baseline
+    from baselines._critic import CriticBaseline
+    from MODEL.model.vectra import VECTRA
+
+    class DummyBaseline(Baseline):
+        def eval_step(self, vrp_dynamics, compat, cust_idx):
+            return 0.0
+
+    for baseline_cls in (DummyBaseline, CriticBaseline):
+        learner = VECTRA(7, 4, model_size=16, selective_customer_encoding=True)
+        reset_called = False
+        orig_reset = learner._reset_customer_encoding
+        def mock_reset():
+            nonlocal reset_called
+            reset_called = True
+            orig_reset()
+        learner._reset_customer_encoding = mock_reset
+
+        if baseline_cls is CriticBaseline:
+            baseline = CriticBaseline(learner, 5)
+        else:
+            baseline = DummyBaseline(learner)
+
+        data = DVRPTW_Dataset.generate(batch_size=2, cust_count=5, veh_count=2)
+        env = DVRPTW_Environment(data, None, None, 2.0, 1.0)
+        baseline(env)
+        assert reset_called, f"Expected _reset_customer_encoding() to be called in {baseline_cls.__name__}.__call__"
+
+
+
 

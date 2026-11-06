@@ -12,6 +12,8 @@ class Baseline:
             bl_vals = self.eval(vrp_dynamics)
         else:
             vrp_dynamics.reset()
+            if hasattr(self.learner, "_reset_customer_encoding"):
+                self.learner._reset_customer_encoding()
             cust_mask = getattr(vrp_dynamics, "cust_mask", None)
             self.learner._encode_customers(vrp_dynamics.nodes, cust_mask)
             if hasattr(vrp_dynamics, "veh_speed"):

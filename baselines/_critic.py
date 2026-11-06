@@ -29,6 +29,8 @@ class CriticBaseline(Baseline):
 
     def __call__(self, vrp_dynamics):
         vrp_dynamics.reset()
+        if hasattr(self.learner, "_reset_customer_encoding"):
+            self.learner._reset_customer_encoding()
         cust_mask = getattr(vrp_dynamics, "cust_mask", None)
         self.learner._encode_customers(vrp_dynamics.nodes, cust_mask)
         if hasattr(vrp_dynamics, "veh_speed"):
