@@ -242,7 +242,7 @@ def _validate_resume(args):
     )
     mismatched = [
         key for key in fields
-        if (saved_config.get(key, True) if key == "selective_customer_encoding" else saved_config.get(key)) != getattr(args, key, None)
+        if (saved_config.get(key, False) if key == "selective_customer_encoding" else saved_config.get(key)) != getattr(args, key, None)
     ]
     if mismatched:
         raise ValueError("Resume config differs in locked fields: {}".format(", ".join(mismatched)))
