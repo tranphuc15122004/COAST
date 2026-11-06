@@ -41,7 +41,8 @@ class VECTRA(nn.Module):
             adaptive_depth = False, adaptive_min_layers = 1, adaptive_easy_ratio = 0.6,
             latent_bottleneck = False, latent_tokens = 32, latent_min_nodes = 64,
             use_edge_features = True, use_memory = True, use_ownership = True,
-            use_lookahead = True, fusion_mode = "mlp", linear_fusion_weights = (1.0, 1.0, 1.0)):
+            use_lookahead = True, fusion_mode = "mlp", linear_fusion_weights = (1.0, 1.0, 1.0),
+            selective_customer_encoding = False):
         r"""
         :param model_size:  Dimension :math:`D` shared by all intermediate layers
         :param layer_count: Number of layers in customers' (graph) Transformer Encoder
@@ -112,6 +113,12 @@ class VECTRA(nn.Module):
         )
 
         self.dropout         = nn.Dropout(dropout)
+        if dropout is not None and hasattr(self, "cust_encoder") and hasattr(self.cust_encoder, "layers"):
+            for layer in self.cust_encoder.layers:
+                if hasattr(layer, "dropout"):
+                    layer.dropout.p = dropout
+                if hasattr(layer, "ff_dropout"):
+                    layer.ff_dropout.p = dropout
         self.greedy = greedy
         self.adaptive_depth = adaptive_depth
         self.adaptive_min_layers = adaptive_min_layers
@@ -126,6 +133,23 @@ class VECTRA(nn.Module):
         self._step_diagnostics = []
         self._step_diagnostics_step = 0
         self._last_score_tensors = None
+        self.selective_customer_encoding = selective_customer_encoding
+        if self.selective_customer_encoding and self.adaptive_depth:
+            raise ValueError("selective_customer_encoding is incompatible with adaptive_depth=True")
+        self.cust_enc = None
+        self.cust_repr = None
+        self._encoded_cust_mask = None
+        self._encoded_nodes_ref = None
+        self._encoded_nodes_version = None
+        self.encoding_stats = {"calls": 0, "rows_encoded": 0, "skipped_calls": 0}
+
+    def _reset_customer_encoding(self):
+        self.cust_enc = None
+        self.cust_repr = None
+        self._encoded_cust_mask = None
+        self._encoded_nodes_ref = None
+        self._encoded_nodes_version = None
+        self.encoding_stats = {"calls": 0, "rows_encoded": 0, "skipped_calls": 0}
 
 
     def _build_bottleneck_indices(self, length, max_tokens, device):
@@ -173,19 +197,13 @@ class VECTRA(nn.Module):
         return full_enc
 
 
-    def _encode_customers(self, customers, mask = None):
-        r"""
-        :param customers: :math:`N \times L_c \times D_c` tensor containing minibatch of customers' features
-        :param mask:      :math:`N \times L_c` tensor containing minibatch of masks
-                where :math:`m_{nj} = 1` if customer :math:`j` in sample :math:`n` is hidden (pad or dyn), 0 otherwise
-        """
-        start = time.perf_counter()
+    def _run_encode_pipeline(self, customers, mask = None):
         cust_emb = torch.cat((
             self.depot_embedding(customers[:,0:1,:]),
             self.cust_embedding(customers[:,1:,:])
             ), dim = 1) #.size() = N x L_c x D
         if mask is not None:
-            cust_emb[mask] = 0
+            cust_emb = cust_emb.masked_fill(mask.unsqueeze(-1), 0.0)
         use_bottleneck = (
             self.latent_bottleneck
             and self.latent_tokens is not None
@@ -194,12 +212,77 @@ class VECTRA(nn.Module):
             and customers.size(1) >= self.latent_min_nodes
         )
         if use_bottleneck:
-            self.cust_enc = self._encode_customers_bottleneck(cust_emb, customers, mask)
+            cust_enc = self._encode_customers_bottleneck(cust_emb, customers, mask)
         else:
-            self.cust_enc = self.cust_encoder(cust_emb, mask, coords = customers[:, :, :2]) #.size() = N x L_c x D
-        self.cust_repr = self.dropout(self.cust_project(self.cust_enc)) #.size() = N x L_c x D
+            cust_enc = self.cust_encoder(cust_emb, mask, coords = customers[:, :, :2]) #.size() = N x L_c x D
+        cust_repr = self.dropout(self.cust_project(cust_enc)) #.size() = N x L_c x D
         if mask is not None:
-            self.cust_repr[mask] = 0
+            cust_repr = cust_repr.masked_fill(mask.unsqueeze(-1), 0.0)
+        return cust_enc, cust_repr
+
+
+    def _encode_customers_selective(self, customers, mask, dirty_rows):
+        row_idx = dirty_rows.nonzero(as_tuple=False).squeeze(-1)
+        nodes_sub = customers.index_select(0, row_idx)
+        mask_sub = mask.index_select(0, row_idx) if mask is not None else None
+        sub_enc, sub_repr = self._run_encode_pipeline(nodes_sub, mask_sub)
+        self.cust_enc = self.cust_enc.index_put((row_idx,), sub_enc.to(self.cust_enc.dtype))
+        self.cust_repr = self.cust_repr.index_put((row_idx,), sub_repr.to(self.cust_repr.dtype))
+        self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
+        self._encoded_nodes_ref = customers
+        self._encoded_nodes_version = getattr(customers, "_version", None)
+        self.encoding_stats["calls"] += 1
+        self.encoding_stats["rows_encoded"] += row_idx.numel()
+
+
+    def _encode_customers(self, customers, mask = None):
+        r"""
+        :param customers: :math:`N \times L_c \times D_c` tensor containing minibatch of customers' features
+        :param mask:      :math:`N \times L_c` tensor containing minibatch of masks
+                where :math:`m_{nj} = 1` if customer :math:`j` in sample :math:`n` is hidden (pad or dyn), 0 otherwise
+        """
+        start = time.perf_counter()
+        if not self.selective_customer_encoding:
+            self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
+            self._forward_profiler.add("encode_customers", time.perf_counter() - start)
+            return
+
+        if self.adaptive_depth:
+            raise ValueError("selective_customer_encoding is incompatible with adaptive_depth=True")
+
+        cold = (
+            self._encoded_cust_mask is None
+            or self.cust_enc is None
+            or self.cust_repr is None
+            or mask is None
+            or self._encoded_cust_mask.shape != mask.shape
+            or self._encoded_cust_mask.device != mask.device
+            or customers is not self._encoded_nodes_ref
+            or getattr(customers, "_version", None) != self._encoded_nodes_version
+            or (mask.bool() & ~self._encoded_cust_mask.bool()).any()
+        )
+        if cold:
+            self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
+            self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
+            self._encoded_nodes_ref = customers
+            self._encoded_nodes_version = getattr(customers, "_version", None)
+            self.encoding_stats["calls"] += 1
+            self.encoding_stats["rows_encoded"] += customers.size(0)
+        else:
+            dirty_rows = mask.ne(self._encoded_cust_mask).any(dim = 1)
+            if not dirty_rows.any():
+                self.encoding_stats["skipped_calls"] += 1
+                self._forward_profiler.add("encode_customers", time.perf_counter() - start)
+                return
+            if dirty_rows.all():
+                self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
+                self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
+                self._encoded_nodes_ref = customers
+                self._encoded_nodes_version = getattr(customers, "_version", None)
+                self.encoding_stats["calls"] += 1
+                self.encoding_stats["rows_encoded"] += customers.size(0)
+            else:
+                self._encode_customers_selective(customers, mask, dirty_rows)
         self._forward_profiler.add("encode_customers", time.perf_counter() - start)
 
 
@@ -288,6 +371,11 @@ class VECTRA(nn.Module):
         return veh_query
 
 
+    def _compatibility_edge_embedding(self, edge_emb):
+        """Return the edge signal consumed by the Compatibility scorer."""
+        return edge_emb
+
+
     def _score_customers(self, veh_repr, cust_repr, edge_emb, owner_bias, lookahead, veh_mask = None):
         r"""
         :param veh_repr: :math:`N \times 1 \times D` tensor containing minibatch of representations for currently acting vehicle
@@ -295,7 +383,9 @@ class VECTRA(nn.Module):
         :return:         :math:`N \times 1 \times L_c` tensor containing minibatch of compatibility scores between currently acting vehicle and each customer
         """
         start = time.perf_counter()
-        att_score = self.cross_fusion(veh_repr, cust_repr, edge_emb)
+        att_score = self.cross_fusion(
+            veh_repr, cust_repr, self._compatibility_edge_embedding(edge_emb)
+        )
         
         # Normalize each score source to a common scale (mean=0, std=1) across candidates
         # so they contribute "fairly" to the final decision.
@@ -476,6 +566,7 @@ class VECTRA(nn.Module):
     def forward(self, dyna):
         self._forward_profiler.reset()
         self._reset_step_diagnostics()
+        self._reset_customer_encoding()
         dyna.reset()
         actions, logps, rewards = [], [], []
         if hasattr(dyna, "veh_speed"):
