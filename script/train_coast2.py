@@ -162,7 +162,8 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
                         activation_offload_cpu=False, activation_checkpointing=False,
                         selective_customer_encoding=None,
                         allow_runtime_optimization_resume=False,
-                        epochs=None, batch_size=None, iter_count=None):
+                        epochs=None, batch_size=None, iter_count=None,
+                        checkpoint_period=None):
     """Resolve COAST2's isolated config against the locked F11 AC recipe."""
     if protocol not in ("full", "smoke"):
         raise ValueError("protocol must be 'full' or 'smoke'")
@@ -257,6 +258,7 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
         data_manifest=None,
         data_manifest_sha256=None,
         keep_checkpoints=5,
+        checkpoint_period=(int(checkpoint_period) if checkpoint_period is not None else 5),
     )
     args.code_sha256 = _source_hashes()
     args.train_data_sha256 = _sha256(args.train_data_file) if Path(args.train_data_file).is_file() else None
@@ -631,16 +633,17 @@ def run_training(args):
             "successful_updates": successful,
             "skipped_updates": skipped,
         }
-        save_coast2_checkpoint(
-            model, output_dir / "chkpt_ep{}.pyth".format(completed_epoch),
-            metadata=metadata, **checkpoint_fields,
-        )
+        if completed_epoch % int(args.checkpoint_period) == 0:
+            save_coast2_checkpoint(
+                model, output_dir / "chkpt_ep{}.pyth".format(completed_epoch),
+                metadata=metadata, **checkpoint_fields,
+            )
+            _prune_epoch_checkpoints(output_dir, args.keep_checkpoints)
         if is_best:
             save_coast2_checkpoint(
                 model, output_dir / "chkpt_best.pyth",
                 metadata=metadata, **checkpoint_fields,
             )
-        _prune_epoch_checkpoints(output_dir, args.keep_checkpoints)
         row = {
             "epoch": completed_epoch,
             "global_step": global_step,
@@ -697,6 +700,8 @@ def main(argv=None):
                         help="Override batch size (default: 512 for full, 2 for smoke)")
     parser.add_argument("--iter-count", "--updates-per-epoch", dest="iter_count", type=int, default=None,
                         help="Override updates per epoch (default: 1000 for full, 1 for smoke)")
+    parser.add_argument("--checkpoint-period", type=int, default=5,
+                        help="Number of epochs between checkpoint saves (default: 5)")
     parser.add_argument("--allow-runtime-optimization-resume", action="store_true",
                         help="Allow only the validated CPU-offload to GPU-checkpointing resume transition")
     parser.add_argument("--dry-run", action="store_true")
@@ -716,6 +721,7 @@ def main(argv=None):
         epochs=cli.epochs,
         batch_size=cli.batch_size,
         iter_count=cli.iter_count,
+        checkpoint_period=cli.checkpoint_period,
     )
     if cli.dry_run:
         print(json.dumps(_jsonable_args(args), indent=2, sort_keys=True))
