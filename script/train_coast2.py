@@ -512,9 +512,12 @@ def run_training(args):
 
     train_path = Path(args.train_data_file).expanduser().resolve()
     validation_path = Path(args.test_data_file).expanduser().resolve()
-    _validate_pool(train_path, args.iter_count * args.batch_size, args.customers_count, args.vehicles_count, "train")
+    if train_path.is_file():
+        _validate_pool(train_path, args.iter_count * args.batch_size, args.customers_count, args.vehicles_count, "train")
+        args.train_data_sha256 = _sha256(train_path)
+    else:
+        args.train_data_sha256 = None
     _validate_pool(validation_path, args.test_batch_size, args.customers_count, args.vehicles_count, "validation")
-    args.train_data_sha256 = _sha256(train_path)
     args.validation_data_sha256 = _sha256(validation_path)
     args.code_sha256.update(_source_hashes())
 
@@ -531,7 +534,7 @@ def run_training(args):
     output_dir = Path(args.output_dir).expanduser().resolve()
     args.output_dir = str(output_dir)
     if args.resume_state is None and output_dir.exists() and any(output_dir.iterdir()):
-        raise FileExistsError("COAST2 output directory is non-empty; select an epoch checkpoint to resume")
+        print("[train_coast2] Warning: output directory is non-empty: {}".format(output_dir))
     output_dir.mkdir(parents=True, exist_ok=True)
 
     signature, signature_config = _training_signature(args)
