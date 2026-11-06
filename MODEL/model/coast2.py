@@ -159,7 +159,7 @@ class COAST2(VECTRA):
                 self.cust_embedding(nodes[:, 1:, :]),
             ), dim=1)
             if mask_input is not None:
-                customer_embedding[mask_input] = 0
+                customer_embedding = customer_embedding.masked_fill(mask_input.unsqueeze(-1), 0.0)
             use_bottleneck = (
                 self.latent_bottleneck
                 and self.latent_tokens is not None
@@ -177,7 +177,7 @@ class COAST2(VECTRA):
                 )
             customer_repr = self.dropout(self.cust_project(customer_encoding))
             if mask_input is not None:
-                customer_repr[mask_input] = 0
+                customer_repr = customer_repr.masked_fill(mask_input.unsqueeze(-1), 0.0)
             return customer_encoding, customer_repr
 
         self.cust_enc, self.cust_repr = self._checkpoint_training_block(
