@@ -186,6 +186,13 @@ def test_selective_encoding_direct_interface():
     model._reset_customer_encoding()
     model._encode_customers(nodes, mask)
 
+    # Empty dirty slice guard test
+    dirty_empty = torch.zeros(batch_size, dtype=torch.bool)
+    model._encode_customers_selective(nodes, mask, dirty_empty)
+    assert model.encoding_stats["calls"] == 1
+    assert model.encoding_stats["rows_encoded"] == 4
+
+    # Non-empty dirty slice
     dirty = torch.tensor([False, True, False, True])
     model._encode_customers_selective(nodes, mask, dirty)
     assert model.encoding_stats["calls"] == 2

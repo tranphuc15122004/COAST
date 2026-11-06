@@ -221,8 +221,19 @@ class VECTRA(nn.Module):
         return cust_enc, cust_repr
 
 
+    def _encode_customers_full(self, customers, mask = None):
+        self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
+        self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
+        self._encoded_nodes_ref = customers
+        self._encoded_nodes_version = getattr(customers, "_version", None)
+        self.encoding_stats["calls"] += 1
+        self.encoding_stats["rows_encoded"] += customers.size(0)
+
+
     def _encode_customers_selective(self, customers, mask, dirty_rows):
         row_idx = dirty_rows.nonzero(as_tuple=False).squeeze(-1)
+        if row_idx.numel() == 0:
+            return
         nodes_sub = customers.index_select(0, row_idx)
         mask_sub = mask.index_select(0, row_idx) if mask is not None else None
         sub_enc, sub_repr = self._run_encode_pipeline(nodes_sub, mask_sub)
@@ -262,12 +273,7 @@ class VECTRA(nn.Module):
             or (mask.bool() & ~self._encoded_cust_mask.bool()).any()
         )
         if cold:
-            self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
-            self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
-            self._encoded_nodes_ref = customers
-            self._encoded_nodes_version = getattr(customers, "_version", None)
-            self.encoding_stats["calls"] += 1
-            self.encoding_stats["rows_encoded"] += customers.size(0)
+            self._encode_customers_full(customers, mask)
         else:
             dirty_rows = mask.ne(self._encoded_cust_mask).any(dim = 1)
             if not dirty_rows.any():
@@ -275,12 +281,7 @@ class VECTRA(nn.Module):
                 self._forward_profiler.add("encode_customers", time.perf_counter() - start)
                 return
             if dirty_rows.all():
-                self.cust_enc, self.cust_repr = self._run_encode_pipeline(customers, mask)
-                self._encoded_cust_mask = mask.detach().clone() if mask is not None else None
-                self._encoded_nodes_ref = customers
-                self._encoded_nodes_version = getattr(customers, "_version", None)
-                self.encoding_stats["calls"] += 1
-                self.encoding_stats["rows_encoded"] += customers.size(0)
+                self._encode_customers_full(customers, mask)
             else:
                 self._encode_customers_selective(customers, mask, dirty_rows)
         self._forward_profiler.add("encode_customers", time.perf_counter() - start)
@@ -372,7 +373,13 @@ class VECTRA(nn.Module):
 
 
     def _compatibility_edge_embedding(self, edge_emb):
-        """Return the edge signal consumed by the Compatibility scorer."""
+        """Return the edge signal consumed by the Compatibility scorer.
+
+        This hook is part of the ablation contract required by
+        `_CompatibilityWithoutEdgesVECTRA` in `MODEL/model/ablation_study.py`
+        (variant F01: zeroing edge embeddings in compatibility scoring while
+        retaining them for coordination memory updates).
+        """
         return edge_emb
 
 
