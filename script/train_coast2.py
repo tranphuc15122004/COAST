@@ -161,7 +161,8 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
                         *, protocol="full", device="cuda", resume_state=None,
                         activation_offload_cpu=False, activation_checkpointing=False,
                         selective_customer_encoding=None,
-                        allow_runtime_optimization_resume=False):
+                        allow_runtime_optimization_resume=False,
+                        epochs=None):
     """Resolve COAST2's isolated config against the locked F11 AC recipe."""
     if protocol not in ("full", "smoke"):
         raise ValueError("protocol must be 'full' or 'smoke'")
@@ -211,7 +212,7 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
         latent_min_nodes=64,
         fusion_mode="mlp",
         linear_fusion_weights=(1.0, 1.0, 1.0),
-        epoch_count=500 if full else 1,
+        epoch_count=(int(epochs) if epochs is not None else (500 if full else 1)),
         iter_count=1000 if full else 1,
         batch_size=512 if full else 2,
         test_batch_size=10240 if full else 4,
@@ -671,6 +672,8 @@ def main(argv=None):
                         help="Recompute COAST2 customer and scoring activations during backward to reduce GPU memory")
     parser.add_argument("--selective-customer-encoding", action=argparse.BooleanOptionalAction, default=None,
                         help="Enable selective customer encoding (default: True, incompatible with --activation-checkpointing)")
+    parser.add_argument("--epochs", "--epoch-count", dest="epochs", type=int, default=None,
+                        help="Override epoch count (default: 500 for full, 1 for smoke)")
     parser.add_argument("--allow-runtime-optimization-resume", action="store_true",
                         help="Allow only the validated CPU-offload to GPU-checkpointing resume transition")
     parser.add_argument("--dry-run", action="store_true")
@@ -687,6 +690,7 @@ def main(argv=None):
         activation_checkpointing=cli.activation_checkpointing,
         selective_customer_encoding=cli.selective_customer_encoding,
         allow_runtime_optimization_resume=cli.allow_runtime_optimization_resume,
+        epochs=cli.epochs,
     )
     if cli.dry_run:
         print(json.dumps(_jsonable_args(args), indent=2, sort_keys=True))
