@@ -272,3 +272,48 @@ def test_selective_encoding_multistep_rollout_eval_math_equivalence():
         assert torch.allclose(model_full.cust_repr, model_sel.cust_repr, atol=1e-5)
 
 
+def test_coast2_rollout_with_selective_encoding():
+    from MODEL.model.coast2 import COAST2, materialize_coast2_model
+    from MODEL.train_coast2 import _rollout_training_batch
+    from baselines._critic import CriticBaseline
+    from argparse import Namespace
+
+    model = COAST2(7, 4, model_size=32, layer_count=1, head_count=4, ff_size=64,
+                   memory_size=32, lookahead_hidden=32, dropout=0.1)
+    materialize_coast2_model(model)
+    model.selective_customer_encoding = True
+    model.activation_checkpointing = False
+
+    critic = CriticBaseline(model, 10, use_qval=False, hidden_size=32)
+
+    data = Namespace(veh_count=2, veh_capa=200, veh_speed=1.0, cust_mask=None)
+    nodes = torch.rand(8, 11, 7)
+    nodes[:, 0, :2] = 0.5  # depot
+    nodes[:, :, 6] = torch.tensor([0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]).unsqueeze(0)
+    cust_mask = None
+    args = Namespace(pending_cost=2.0, late_cost=1.0)
+
+    logps, rewards, bl_vals, alive, contexts = _rollout_training_batch(
+        model, critic, data, nodes, cust_mask, args
+    )
+    assert len(logps) > 0
+    assert model.encoding_stats["skipped_calls"] > 0 or model.encoding_stats["rows_encoded"] < len(logps) * 8
+
+
+def test_coast2_selective_encoding_incompatible_activation_checkpointing():
+    from MODEL.model.coast2 import COAST2
+
+    # Incompatible in __init__
+    with pytest.raises(ValueError, match="Cannot combine activation_checkpointing with selective_customer_encoding"):
+        COAST2(7, 4, model_size=32, selective_customer_encoding=True, activation_checkpointing=True)
+
+    # Incompatible dynamically in _encode_customers
+    model = COAST2(7, 4, model_size=32, selective_customer_encoding=True, activation_checkpointing=False)
+    model.activation_checkpointing = True
+    nodes = torch.rand(4, 8, 7)
+    mask = torch.zeros(4, 8, dtype=torch.bool)
+    with pytest.raises(ValueError, match="Cannot combine activation_checkpointing with selective_customer_encoding"):
+        model._encode_customers(nodes, mask)
+
+
+
