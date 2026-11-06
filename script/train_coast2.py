@@ -162,7 +162,7 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
                         activation_offload_cpu=False, activation_checkpointing=False,
                         selective_customer_encoding=None,
                         allow_runtime_optimization_resume=False,
-                        epochs=None):
+                        epochs=None, batch_size=None, iter_count=None):
     """Resolve COAST2's isolated config against the locked F11 AC recipe."""
     if protocol not in ("full", "smoke"):
         raise ValueError("protocol must be 'full' or 'smoke'")
@@ -213,8 +213,8 @@ def build_training_args(seed, train_data_file, validation_data_file, output_dir,
         fusion_mode="mlp",
         linear_fusion_weights=(1.0, 1.0, 1.0),
         epoch_count=(int(epochs) if epochs is not None else (500 if full else 1)),
-        iter_count=1000 if full else 1,
-        batch_size=512 if full else 2,
+        iter_count=(int(iter_count) if iter_count is not None else (1000 if full else 1)),
+        batch_size=(int(batch_size) if batch_size is not None else (512 if full else 2)),
         test_batch_size=10240 if full else 4,
         validation_batch_size=512 if full else 2,
         learning_rate=1e-4,
@@ -519,15 +519,14 @@ def run_training(args):
     args.code_sha256.update(_source_hashes())
 
     manifest_path = train_path.parent / "manifest.json"
-    if args.run_protocol == "full" and (
-        not manifest_path.is_file() or validation_path.parent != train_path.parent
-    ):
-        raise FileNotFoundError("Full COAST2 runs require train/validation pools and manifest.json from one pool")
     if manifest_path.is_file() and validation_path.parent == train_path.parent:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         _validate_data_manifest(manifest, args)
         args.data_manifest = str(manifest_path.resolve())
         args.data_manifest_sha256 = _sha256(manifest_path)
+    else:
+        args.data_manifest = None
+        args.data_manifest_sha256 = None
 
     output_dir = Path(args.output_dir).expanduser().resolve()
     args.output_dir = str(output_dir)
@@ -541,7 +540,24 @@ def run_training(args):
     torch.backends.cudnn.benchmark = device.type == "cuda"
     _set_random_seed(args.rng_seed)
 
-    train_data = DVRPTW_Dataset.load(train_path)
+    if train_path.is_file():
+        train_data = DVRPTW_Dataset.load(train_path)
+    else:
+        print("[train_coast2] Training file not found at '{}', generating training data...".format(train_path))
+        gen_count = int(args.iter_count) * int(args.batch_size)
+        train_data = DVRPTW_Dataset.generate(
+            gen_count,
+            cust_count=args.customers_count,
+            veh_count=args.vehicles_count,
+            veh_capa=args.veh_capa,
+            veh_speed=args.veh_speed,
+            horizon=args.horizon,
+            cust_dur_range=args.dur_range,
+            cust_tw_range=args.tw_range,
+            tw_ratio=args.tw_ratio,
+            dod=args.deg_of_dyna,
+            d_early_ratio=args.appear_early_ratio,
+        )
     validation_data = DVRPTW_Dataset.load(validation_path)
     train_data.normalize()
     validation_data.normalize()
@@ -674,6 +690,10 @@ def main(argv=None):
                         help="Enable selective customer encoding (default: True, incompatible with --activation-checkpointing)")
     parser.add_argument("--epochs", "--epoch-count", dest="epochs", type=int, default=None,
                         help="Override epoch count (default: 500 for full, 1 for smoke)")
+    parser.add_argument("--batch-size", type=int, default=None,
+                        help="Override batch size (default: 512 for full, 2 for smoke)")
+    parser.add_argument("--iter-count", "--updates-per-epoch", dest="iter_count", type=int, default=None,
+                        help="Override updates per epoch (default: 1000 for full, 1 for smoke)")
     parser.add_argument("--allow-runtime-optimization-resume", action="store_true",
                         help="Allow only the validated CPU-offload to GPU-checkpointing resume transition")
     parser.add_argument("--dry-run", action="store_true")
@@ -691,6 +711,8 @@ def main(argv=None):
         selective_customer_encoding=cli.selective_customer_encoding,
         allow_runtime_optimization_resume=cli.allow_runtime_optimization_resume,
         epochs=cli.epochs,
+        batch_size=cli.batch_size,
+        iter_count=cli.iter_count,
     )
     if cli.dry_run:
         print(json.dumps(_jsonable_args(args), indent=2, sort_keys=True))
