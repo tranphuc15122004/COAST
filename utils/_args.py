@@ -318,6 +318,8 @@ def parse_args(argv = None):
     group.add_argument("--disable-memory", action = "store_false", dest = "use_memory", default = USE_MEMORY)
     group.add_argument("--disable-ownership", action = "store_false", dest = "use_ownership", default = USE_OWNERSHIP)
     group.add_argument("--disable-lookahead", action = "store_false", dest = "use_lookahead", default = USE_LOOKAHEAD)
+    group.add_argument("--selective-customer-encoding", action = "store_true", default = False,
+            help = "Enable selective customer encoding in VECTRA")
     group.add_argument("--fusion-mode", type = str, choices = ["mlp", "linear"], default = FUSION_MODE)
     group.add_argument("--linear-fusion-weights", type = float, nargs = 3, default = LINEAR_FUSION_WEIGHTS,
             help = "Weights for linear fusion mode: att ownership lookahead")

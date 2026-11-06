@@ -566,6 +566,7 @@ def main(args):
             use_lookahead = args.use_lookahead,
             fusion_mode = args.fusion_mode,
             linear_fusion_weights = args.linear_fusion_weights,
+            selective_customer_encoding = getattr(args, "selective_customer_encoding", False),
             )
     learner.to(dev)
     verbose_print("Done.")
