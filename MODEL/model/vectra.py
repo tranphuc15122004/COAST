@@ -34,7 +34,7 @@ class ForwardProfiler:
         ]
         return summary, total
 
-class VECTRA(nn.Module):
+class COAST(nn.Module):
     def __init__(self, cust_feat_size, veh_state_size, model_size = 128,
             layer_count = 3, head_count = 8, ff_size = 512, tanh_xplor = 10, greedy = False,
             edge_feat_size = 8, cust_k = None, memory_size = None, lookahead_hidden = 128 , dropout = 0.1,
@@ -647,3 +647,7 @@ class VECTRA(nn.Module):
                 "final_score": row_values("final_score", batch_idx),
             })
         self._step_diagnostics_step += 1
+
+
+# Backward compatibility alias
+VECTRA = COAST

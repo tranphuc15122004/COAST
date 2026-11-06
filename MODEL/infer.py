@@ -163,7 +163,7 @@ def _build_env_params(args):
 
 
 def _init_model(args, dataset_cls, env_cls, device):
-	learner = VECTRA(
+	learner = COAST(
 		dataset_cls.CUST_FEAT_SIZE,
 		env_cls.VEH_STATE_SIZE,
 		model_size = args.model_size,

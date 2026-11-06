@@ -540,7 +540,7 @@ def main(args):
     # MODEL
     verbose_print("Initializing attention model...",
         end = " ", flush = True)
-    learner : torch.Module = VECTRA(
+    learner : torch.Module = COAST(
             Dataset.CUST_FEAT_SIZE,
             Environment.VEH_STATE_SIZE,
             model_size = args.model_size,

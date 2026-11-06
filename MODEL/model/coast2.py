@@ -11,7 +11,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 
-from .vectra import VECTRA
+from .vectra import COAST, VECTRA
 
 
 CONTEXT_FIELDS = (
@@ -60,7 +60,7 @@ class PostDecisionLookahead(nn.Module):
         return self.predictor(features).squeeze(-1)
 
 
-class COAST2(VECTRA):
+class COAST2(COAST):
     """COAST variant with separate lookahead; inputs use dataset-normalized time units."""
 
     def __init__(self, cust_feat_size: int, veh_state_size: int, *,
@@ -98,7 +98,7 @@ class COAST2(VECTRA):
         self.activation_checkpointing = bool(activation_checkpointing)
         if self.selective_customer_encoding and self.activation_checkpointing:
             raise ValueError("Cannot combine activation_checkpointing with selective_customer_encoding")
-        resolved = inspect.signature(VECTRA.__init__).bind_partial(
+        resolved = inspect.signature(COAST.__init__).bind_partial(
             None, cust_feat_size, veh_state_size, **kwargs
         )
         resolved.apply_defaults()

@@ -309,15 +309,18 @@ def run_training(args):
 
     import MODEL.train as trainer
 
-    previous_model_factory = trainer.VECTRA
-    trainer.VECTRA = partial(
+    previous_model_factory = getattr(trainer, "COAST", trainer.VECTRA)
+    factory = partial(
         build_ablation_model,
         args.study_variant,
         selective_customer_encoding=bool(getattr(args, "selective_customer_encoding", True)),
     )
+    trainer.COAST = factory
+    trainer.VECTRA = factory
     try:
         trainer.main(args)
     finally:
+        trainer.COAST = previous_model_factory
         trainer.VECTRA = previous_model_factory
 
 

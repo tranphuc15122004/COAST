@@ -7,7 +7,7 @@ import time
 import torch
 import torch.nn as nn
 
-from .vectra import VECTRA
+from .vectra import COAST, VECTRA
 
 
 ROLE_AWARE_GENERIC_OWNERSHIP = "role_aware_generic_memory"
@@ -108,14 +108,17 @@ class RoleAwareMemoryScoringHead(nn.Module):
         return self.output_projection(hidden).transpose(1, 2)
 
 
-class _CompatibilityWithoutEdgesVECTRA(VECTRA):
+class _CompatibilityWithoutEdgesCOAST(COAST):
     """F01: keep raw edges for memory updates, mask only the Compatibility path."""
 
     def _compatibility_edge_embedding(self, edge_emb):
         return torch.zeros_like(edge_emb)
 
 
-class _GenericMemoryOwnershipVECTRA(VECTRA):
+_CompatibilityWithoutEdgesVECTRA = _CompatibilityWithoutEdgesCOAST
+
+
+class _GenericMemoryOwnershipCOAST(COAST):
     """CM: replace only the Ownership score head with a generic memory scorer."""
 
     def __init__(self, *args, **kwargs):
@@ -140,13 +143,16 @@ class _GenericMemoryOwnershipVECTRA(VECTRA):
         return score
 
 
+_GenericMemoryOwnershipVECTRA = _GenericMemoryOwnershipCOAST
+
+
 def build_ablation_model(
     name: str,
     cust_feat_size: int,
     veh_state_size: int,
     selective_customer_encoding: bool = False,
     **kwargs,
-) -> VECTRA:
+) -> COAST:
     """Build a study model while enforcing that variant's edge/memory contract."""
     spec = variant_spec(name)
     required = {
@@ -162,11 +168,11 @@ def build_ablation_model(
             )
         kwargs[key] = expected
 
-    model_class = VECTRA
+    model_class = COAST
     if name.lower() == "f01":
-        model_class = _CompatibilityWithoutEdgesVECTRA
+        model_class = _CompatibilityWithoutEdgesCOAST
     elif name.lower() == "cm":
-        model_class = _GenericMemoryOwnershipVECTRA
+        model_class = _GenericMemoryOwnershipCOAST
     model = model_class(
         cust_feat_size,
         veh_state_size,

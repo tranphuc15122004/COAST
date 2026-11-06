@@ -101,7 +101,15 @@ def _apply_ablation_profile(args):
                 return args
 
         profiles = {
-                # full vectra-style model
+                # full coast/vectra model
+                "coast": {
+                        "use_edge_features": True,
+                        "use_memory": True,
+                        "use_ownership": True,
+                        "use_lookahead": True,
+                        "fusion_mode": "mlp",
+                        "linear_fusion_weights": (1.0, 1.0, 1.0),
+                },
                 "vectra": {
                         "use_edge_features": True,
                         "use_memory": True,
@@ -307,7 +315,7 @@ def parse_args(argv = None):
             "--ablation-profile",
             type = str,
             choices = [
-                    "none", "vectra", "b0", "b1", "b3", "b5", "edgeoff",
+                    "none", "coast", "vectra", "b0", "b1", "b3", "b5", "edgeoff",
                     "no_ownership", "noownership", "no_lookahead", "nolookahead",
                     "a0", "a1", "a3", "a4", "a9",
             ],

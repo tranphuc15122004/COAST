@@ -1,4 +1,4 @@
-from MODEL.model import VECTRA
+from MODEL.model import COAST, VECTRA
 from problems import *
 from baselines import *
 from externals import *
@@ -390,7 +390,7 @@ def main(args):
 		test_env.init_cust_mask = test_env.init_cust_mask.to(dev)
 
 	verbose_print("Initializing attention model...", end = " ", flush = True)
-	learner = VECTRA(
+	learner = COAST(
 		Dataset.CUST_FEAT_SIZE,
 		Environment.VEH_STATE_SIZE,
 		model_size = args.model_size,

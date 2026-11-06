@@ -55,6 +55,9 @@ def load_vectra_from_checkpoint(ckpt_path, device):
     return learner
 
 
+load_coast_from_checkpoint = load_vectra_from_checkpoint
+
+
 def evaluate_model(learner, data, device, env_params=(2, 1)):
     """Run one evaluation pass, return costs tensor (N,)."""
     env = DVRPTW_Environment(data, None, None, *env_params)
